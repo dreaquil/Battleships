@@ -1,6 +1,6 @@
 # Battleships
 
-Battleships game server. Uses "CRUD" service (UserService) built with Oat++.
+Battleships game server built with Oat++.
 
 ## Rules for BattleShip (a Milton Bradley Game)
 
