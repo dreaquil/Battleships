@@ -12,7 +12,8 @@ hit your ships by calling out coordinates. Neither you nor the other player can 
 board so you must try to guess where they are. Each board in the physical game has two grids:
 the lower (horizontal) section for the player's ships and the upper part (vertical during play)
 for recording the player's guesses.
-Starting a New Game
+
+#### Starting a New Game
 Each player places the 5 ships somewhere on their board. The ships can only be placed
 vertically or horizontally. Diagonal placement is not allowed. No part of a ship may hang off
 the edge of the board. Ships may not overlap each other. No ships may be placed on another
@@ -21,7 +22,7 @@ Once the guessing begins, the players may not move the ships.
 The 5 ships are: Carrier (occupies 5 spaces), Battleship (4), Cruiser (3), Submarine (3), and
 Destroyer (2).
 
-### Playing the Game
+#### Playing the Game
 Player's take turns guessing by calling out the coordinates. The opponent responds with "hit"
 or "miss" as appropriate. Both players should mark their board with pegs: red for hit, white
 for miss. For example, if you call out F6 and your opponent does not have any ship located at
