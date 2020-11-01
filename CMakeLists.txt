@@ -6,17 +6,20 @@ set(CMAKE_CXX_STANDARD 11)
 add_library(battleships-lib
         src/controller/StaticController.hpp
         src/controller/UserController.hpp
-        src/db/UserDb.hpp
+        src/db/GameStateDbClient.hpp
         src/dto/PageDto.hpp
+        src/dto/GameDto.hpp
         src/dto/StatusDto.hpp
         src/dto/UserDto.hpp
         src/service/UserService.cpp
         src/service/UserService.hpp
+        src/service/GameService.cpp
+        src/service/GameService.hpp
         src/AppComponent.hpp
         src/DatabaseComponent.hpp
         src/SwaggerComponent.hpp
         src/ErrorHandler.cpp
-        src/ErrorHandler.hpp)
+        src/ErrorHandler.hpp src/controller/GameController.hpp)
 
 ## include directories
 
@@ -53,7 +56,7 @@ endif()
 
 ## add executables
 
-add_executable(battleships-exe src/App.cpp src/db/UserDb.hpp)
+add_executable(battleships-exe src/App.cpp)
 target_link_libraries(battleships-exe battleships-lib)
 
 add_executable(battleships-test
