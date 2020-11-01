@@ -1,3 +1,28 @@
+CREATE TABLE ship_classes
+(
+    id            INTEGER PRIMARY KEY,
+    name          VARCHAR,
+    symbol        VARCHAR,
+    size          VARCHAR
+);
+
+INSERT INTO ship_classes (id, name, symbol, size) VALUES (0, "Aircraft Carrier", "A", 5);
+INSERT INTO ship_classes (id, name, symbol, size) VALUES (1, "Battleship", "B", 4);
+INSERT INTO ship_classes (id, name, symbol, size) VALUES (2, "Cruiser", "C", 3);
+INSERT INTO ship_classes (id, name, symbol, size) VALUES (3, "Submarine", "S", 3);
+INSERT INTO ship_classes (id, name, symbol, size) VALUES (4, "Destroyer", "D", 2);
+
+CREATE TABLE ships (
+    id                           INTEGER PRIMARY KEY,
+    game_id                      VARCHAR,
+    player_id                    VARCHAR,
+    class_id                     VARCHAR,
+    top_left_row                 VARCHAR,
+    top_left_column              VARCHAR,
+    bottom_left_row              VARCHAR,
+    bottom_right_column          VARCHAR,
+);
+
 CREATE TABLE games (
     id          INTEGER PRIMARY KEY,
     status      VARCHAR
@@ -11,36 +36,14 @@ CREATE TABLE players (
     name     VARCHAR UNIQUE
 );
 
-CREATE TABLE ships (
-    id            INTEGER PRIMARY KEY,
-    game_id       VARCHAR,
-    player_id     VARCHAR,
-    ship_id       VARCHAR,
-    coordinates   VARCHAR
-);
-
-CREATE TABLE ship_classes
-(
-    id            INTEGER PRIMARY KEY,
-    name          VARCHAR,
-    symbol        VARCHAR,
-    size          VARCHAR
-);
-
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Aircraft Carrier", "A", 5);
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Battleship", "B", 4);
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Cruiser", "C", 3);
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Submarine", "S", 3);
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Destroyer", "D", 2);
-
-
 CREATE TABLE pegs
 (
-    id            INTEGER PRIMARY KEY,
-    game_id       VARCHAR,
-    player_id     VARCHAR,
-    coordinate    VARCHAR,
-    colour        VARCHAR
+    id               INTEGER PRIMARY KEY,
+    game_id          VARCHAR,
+    player_id        VARCHAR,
+    row              VARCHAR,
+    column           VARCHAR,
+    colour           VARCHAR
 );
 
 
@@ -62,16 +65,6 @@ CREATE TABLE AppUser (
 
 INSERT INTO AppUser
 (username, email, password, role) VALUES ('admin', 'admin@domain.com', 'admin', 'ROLE_ADMIN');
-
-CREATE TABLE ships
-(
-    id            INTEGER PRIMARY KEY,
-    game_id       INTEGER,
-    player_id     INTEGER,
-    name          VARCHAR,
-    symbol        VARCHAR,
-    coordinates   VARCHAR
-);
 
 
 --SELECT * FROM ships;

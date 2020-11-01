@@ -13,13 +13,13 @@ add_library(battleships-lib
         src/dto/UserDto.hpp
         src/service/UserService.cpp
         src/service/UserService.hpp
-        src/service/GameService.cpp
-        src/service/GameService.hpp
+        src/service/GameManagementService.cpp
+        src/service/GameManagementService.hpp
         src/AppComponent.hpp
         src/DatabaseComponent.hpp
         src/SwaggerComponent.hpp
         src/ErrorHandler.cpp
-        src/ErrorHandler.hpp src/controller/GameController.hpp src/service/PlayerService.hpp src/dto/PlayerDto.hpp src/service/PlayerService.cpp)
+        src/ErrorHandler.hpp src/controller/GameManagementController.hpp src/dto/PlayerDto.hpp src/buisness-logic/Coordinate.hpp)
 
 ## include directories
 
