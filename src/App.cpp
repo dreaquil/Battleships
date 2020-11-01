@@ -1,6 +1,7 @@
 
 #include "AppComponent.hpp"
 
+#include "controller/GameController.hpp"
 #include "controller/UserController.hpp"
 #include "controller/StaticController.hpp"
 
@@ -24,6 +25,11 @@ void run() {
   
   docEndpoints->pushBackAll(userController->getEndpoints());
   
+  auto gameController = GameController::createShared();
+  gameController->addEndpointsToRouter(router);
+
+  docEndpoints->pushBackAll(gameController->getEndpoints());
+
   auto swaggerController = oatpp::swagger::Controller::createShared(docEndpoints);
   swaggerController->addEndpointsToRouter(router);
 

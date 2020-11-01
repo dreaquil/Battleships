@@ -90,3 +90,10 @@ $ docker run -p 8000:8000 -t battleships
 |`GET`|http://localhost:8000/users/{userId} | Get User by ID |
 |`DELETE`|http://localhost:8000/users/{userId} | Delete User by ID |
 |`GET`|http://localhost:8000/users/offset/{offset}/limit/{limit} | Get All Users with Paging |
+
+#### Game Service
+
+|HTTP Method|URL|Description|
+|---|---|---|
+|`POST`|http://localhost:8000/games | Create new Game |
+|`GET`|http://localhost:8000/games/{gameId} | Get Game by ID |
