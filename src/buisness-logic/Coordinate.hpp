@@ -12,7 +12,7 @@ namespace Battleships {
 
     class Coordinate {
     public:
-        Coordinate(Row r, Column c) : row(r), column(c) {}
+        Coordinate(Row r, Column c);
 
     private:
         Row row;

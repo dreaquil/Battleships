@@ -24,7 +24,7 @@ add_library(battleships-lib
         src/dto/PlayerDto.hpp
         src/buisness-logic/Coordinate.hpp
         src/dto/PlaceShipsDto.hpp
-        src/buisness-logic/Row.hpp src/buisness-logic/Column.hpp src/buisness-logic/Orientation.hpp)
+        src/buisness-logic/Row.hpp src/buisness-logic/Column.hpp src/buisness-logic/Orientation.hpp src/buisness-logic/Coordinate.cpp)
 
 ## include directories
 
