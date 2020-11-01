@@ -2,7 +2,7 @@
 #ifndef GAMESERVICE_HPP
 #define GAMESERVICE_HPP
 
-#include "db/GameDb.hpp"
+#include "db/GameStateDbClient.hpp"
 #include "dto/PageDto.hpp"
 #include "dto/StatusDto.hpp"
 
@@ -13,7 +13,7 @@ class GameService {
 private:
   typedef oatpp::web::protocol::http::Status Status;
 private:
-  OATPP_COMPONENT(std::shared_ptr<GameDb>, m_database); // Inject database component
+  OATPP_COMPONENT(std::shared_ptr<GameStateDbClient>, m_database); // Inject database component
 public:
 
   oatpp::Object<GameDto> createGame(const oatpp::Object<GameDto>& dto);
