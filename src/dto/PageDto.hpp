@@ -3,6 +3,7 @@
 #define CRUD_PAGEDTO_HPP
 
 #include "UserDto.hpp"
+#include "GameDto.hpp"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
@@ -23,6 +24,13 @@ class UsersPageDto : public PageDto<oatpp::Object<UserDto>> {
   DTO_INIT(UsersPageDto, PageDto<oatpp::Object<UserDto>>)
 
 };
+
+class GamesPageDto : public PageDto<oatpp::Object<UserDto>> {
+
+    DTO_INIT(GamesPageDto, PageDto<oatpp::Object<GameDto>>)
+
+};
+
 
 #include OATPP_CODEGEN_END(DTO)
 
