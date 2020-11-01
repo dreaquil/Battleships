@@ -1,5 +1,5 @@
 
-#include "GameService.hpp"
+#include "GameManagementService.hpp"
 
 oatpp::Object<GameDto> GameService::createGame(const oatpp::Object<GameDto>& dto) {
 
