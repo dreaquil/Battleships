@@ -69,31 +69,3 @@ $ ./battleships-exe        # - run application.
 $ docker build -t battleships .
 $ docker run -p 8000:8000 -t battleships
 ```
-
----
-
-### Endpoints 
-
-#### HTML
-
-|HTTP Method|URL|Description|
-|---|---|---|
-|`GET`|http://localhost:8000/ | Root page |
-|`GET`|http://localhost:8000/swagger/ui | Swagger UI page |
-
-#### User Service
-
-|HTTP Method|URL|Description|
-|---|---|---|
-|`POST`|http://localhost:8000/users | Create new User |
-|`PUT`|http://localhost:8000/users/{userId} | Update User by ID |
-|`GET`|http://localhost:8000/users/{userId} | Get User by ID |
-|`DELETE`|http://localhost:8000/users/{userId} | Delete User by ID |
-|`GET`|http://localhost:8000/users/offset/{offset}/limit/{limit} | Get All Users with Paging |
-
-#### Game Service
-
-|HTTP Method|URL|Description|
-|---|---|---|
-|`POST`|http://localhost:8000/games | Create new Game |
-|`GET`|http://localhost:8000/games/{gameId} | Get Game by ID |

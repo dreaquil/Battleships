@@ -1,7 +1,7 @@
 
 #include "AppComponent.hpp"
 
-#include "controller/GameController.hpp"
+#include "controller/GameManagementController.hpp"
 #include "controller/UserController.hpp"
 #include "controller/StaticController.hpp"
 
@@ -25,7 +25,7 @@ void run() {
   
   docEndpoints->pushBackAll(userController->getEndpoints());
   
-  auto gameController = GameController::createShared();
+  auto gameController = GameManagementController::createShared();
   gameController->addEndpointsToRouter(router);
 
   docEndpoints->pushBackAll(gameController->getEndpoints());

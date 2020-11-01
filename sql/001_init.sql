@@ -27,11 +27,11 @@ CREATE TABLE ship_classes
     size          VARCHAR
 );
 
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Aircraft Carrier", "A", 5);
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Battleship", "B", 4);
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Cruiser", "C", 3);
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Submarine", "S", 3);
-INSERT INTO ship_classes (name, symbol, length) VALUES ("Destroyer", "D", 2);
+INSERT INTO ship_classes (name, symbol, size) VALUES ("Aircraft Carrier", "A", 5);
+INSERT INTO ship_classes (name, symbol, size) VALUES ("Battleship", "B", 4);
+INSERT INTO ship_classes (name, symbol, size) VALUES ("Cruiser", "C", 3);
+INSERT INTO ship_classes (name, symbol, size) VALUES ("Submarine", "S", 3);
+INSERT INTO ship_classes (name, symbol, size) VALUES ("Destroyer", "D", 2);
 
 
 CREATE TABLE pegs
@@ -62,16 +62,6 @@ CREATE TABLE AppUser (
 
 INSERT INTO AppUser
 (username, email, password, role) VALUES ('admin', 'admin@domain.com', 'admin', 'ROLE_ADMIN');
-
-CREATE TABLE ships
-(
-    id            INTEGER PRIMARY KEY,
-    game_id       INTEGER,
-    player_id     INTEGER,
-    name          VARCHAR,
-    symbol        VARCHAR,
-    coordinates   VARCHAR
-);
 
 
 --SELECT * FROM ships;
