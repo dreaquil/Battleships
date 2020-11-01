@@ -19,7 +19,7 @@ add_library(battleships-lib
         src/DatabaseComponent.hpp
         src/SwaggerComponent.hpp
         src/ErrorHandler.cpp
-        src/ErrorHandler.hpp src/controller/GameController.hpp)
+        src/ErrorHandler.hpp src/controller/GameController.hpp src/service/PlayerService.hpp src/dto/PlayerDto.hpp src/service/PlayerService.cpp)
 
 ## include directories
 

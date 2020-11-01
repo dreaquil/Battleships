@@ -2,6 +2,7 @@
 #ifndef CRUD_USERDB_HPP
 #define CRUD_USERDB_HPP
 
+#include "dto/PlayerDto.hpp"
 #include "dto/GameDto.hpp"
 #include "dto/UserDto.hpp"
 #include "oatpp-sqlite/orm.hpp"
@@ -68,6 +69,20 @@ public:
     QUERY(getGameById,
           "SELECT * FROM games WHERE id=:id;",
           PARAM(oatpp::Int32, id))
+
+    QUERY(createPlayer,
+          "INSERT INTO players"
+          "(name) VALUES "
+          "(:player.name);",
+          PARAM(oatpp::Object<PlayerDto>, player))
+
+    QUERY(getPlayerById,
+          "SELECT * FROM players WHERE id=:id;",
+          PARAM(oatpp::Int32, id))
+
+    QUERY(getAllPlayers,
+          "SELECT * FROM players")
+
 
 };
 
