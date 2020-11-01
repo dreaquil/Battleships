@@ -5,14 +5,22 @@
 #ifndef BATTLESHIPS_COORDINATE_HPP
 #define BATTLESHIPS_COORDINATE_HPP
 
-class Coordinate
-{
-public:
-    Coordinate(unsigned int r, unsigned int c) : row(r), column(c) {}
-private:
-    unsigned int row;
-    unsigned int column;
-    Coordinate() = delete;
-};
+#include "buisness-logic/Column.hpp"
+#include "buisness-logic/Row.hpp"
+
+namespace Battleships {
+
+    class Coordinate {
+    public:
+        Coordinate(Row r, Column c) : row(r), column(c) {}
+
+    private:
+        Row row;
+        Column column;
+
+        Coordinate() = delete;
+    };
+
+}
 
 #endif //BATTLESHIPS_COORDINATE_HPP
