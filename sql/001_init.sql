@@ -24,7 +24,7 @@ CREATE TABLE ship_classes
     id            INTEGER PRIMARY KEY,
     name          VARCHAR,
     symbol        VARCHAR,
-    length        VARCHAR
+    size          VARCHAR
 );
 
 INSERT INTO ship_classes (name, symbol, length) VALUES ("Aircraft Carrier", "A", 5);
