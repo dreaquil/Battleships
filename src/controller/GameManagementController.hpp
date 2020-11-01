@@ -58,7 +58,7 @@ public:
     ENDPOINT("POST", "player", createPlayer,
              BODY_DTO(Object<PlayerDto>, playerDto))
     {
-        return createDtoResponse(Status::CODE_200, m_gameManagementService.createPlayer(playerDto));
+        return createDtoResponse(Status::CODE_200, m_gameManagementService.addPlayer(playerDto));
     }
 
     ENDPOINT_INFO(getPlayers) {

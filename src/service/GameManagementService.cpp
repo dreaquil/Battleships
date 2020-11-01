@@ -27,7 +27,7 @@ oatpp::Object<GameDto> GameManagementService::getGameById(const oatpp::Int32& id
 
 }
 
-oatpp::Object<PlayerDto> GameManagementService::createPlayer(const oatpp::Object<PlayerDto>& dto) {
+oatpp::Object<PlayerDto> GameManagementService::addPlayer(const oatpp::Object<PlayerDto>& dto) {
 
     auto dbResult = m_database->createPlayer(dto);
     OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
