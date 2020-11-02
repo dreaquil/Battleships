@@ -7,20 +7,20 @@
 
 namespace Battleships {
 
-    enum class Row {
-        A = 0,
-        B,
-        C,
-        D,
-        E,
-        F,
-        G,
-        H,
-        I,
-        J,
+    enum class Row : char {
+        A = 'A',
+        B = 'B',
+        C = 'C',
+        D = 'D',
+        E = 'E',
+        F = 'F',
+        G = 'G',
+        H = 'H',
+        I = 'I',
+        J = 'J',
 
-        nRow,
-        Invalid = -1,
+        nRow = 10,
+        Invalid = '-',
     };
 
 }

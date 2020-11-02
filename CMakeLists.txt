@@ -23,8 +23,14 @@ add_library(battleships-lib
         src/controller/GameManagementController.hpp
         src/dto/PlayerDto.hpp
         src/buisness-logic/Coordinate.hpp
-        src/dto/PlaceShipsDto.hpp
-        src/buisness-logic/Row.hpp src/buisness-logic/Column.hpp src/buisness-logic/Coordinate.cpp src/buisness-logic/Ship.cpp src/buisness-logic/Ship.hpp)
+        src/dto/ShipPositionDto.hpp
+        src/buisness-logic/Row.hpp
+        src/buisness-logic/Column.hpp
+        src/buisness-logic/Coordinate.cpp
+        src/buisness-logic/Ship.cpp
+        src/buisness-logic/Ship.hpp
+        src/dto/PlayerShipPositionsDto.hpp
+        )
 
 ## include directories
 

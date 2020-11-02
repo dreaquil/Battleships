@@ -7,20 +7,21 @@
 
 namespace Battleships {
 
-    enum class Column {
-        One = 0,
-        Two,
-        Three,
-        Four,
-        Five,
-        Six,
-        Seven,
-        Eight,
-        Nine,
-        Ten,
+    enum class Column : unsigned int {
 
-        nColumn,
-        Invalid = -1,
+        Zero = 0,
+        One = 1,
+        Two = 2,
+        Three = 3,
+        Four = 4,
+        Five = 5,
+        Six = 6,
+        Seven = 7,
+        Eight = 8,
+        Nine = 9,
+
+        nColumn = 10,
+        Invalid = '-',
     };
 
 }
