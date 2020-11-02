@@ -50,12 +50,12 @@ namespace Battleships {
         enum class TerminateGameResponse {
             ACCEPTED_ABORTING_GAME,
         };
-        TerminateResponse terminateGame();
+        TerminateGameResponse terminateGame();
 
         enum class RestartResponse {
             ACCEPTED_RESTART_SESSION,
         };
-        TerminateResponse restartGame();
+        RestartResponse restartGame();
 
     private:
 

@@ -32,7 +32,7 @@ public:
         return std::make_shared<SessionManagementController>(objectMapper);
     }
 
-    
+
     ENDPOINT_INFO(createPlayer) {
         info->summary = "Create new PlayerData";
 
