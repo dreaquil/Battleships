@@ -104,8 +104,26 @@ namespace Battleships
     }
 
     bool Ship::isHangingOffEdge() const {
-        return bottomRightCoordinate().isValid();
+        return topLeftCoordinate().isValid() && bottomRightCoordinate().isValid();
     }
 
+    bool Ship::isValid() const {
+        return isHangingOffEdge() && hasValidOrientation() && hasValidType();
+    }
+
+    bool Ship::hasValidType() const {
+        return
+        _type == Type::AIRCRAFT_CARRIER ||
+        _type == Type::BATTLESHIP ||
+        _type == Type::CRUISER ||
+        _type == Type::DESTROYER ||
+        _type == Type::SUBMARINE;
+    }
+
+    bool Ship::hasValidOrientation() const {
+        return
+        _orientation == Orientation::Horizontal ||
+        _orientation == Orientation::Vertical;
+    }
 
 }

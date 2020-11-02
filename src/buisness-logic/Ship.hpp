@@ -45,7 +45,6 @@ namespace Battleships {
         bool isValid() const;
         bool isHangingOffEdge() const;
         bool hasValidType() const;
-        bool hasValidSize() const;
         bool hasValidOrientation() const;
 
     private:
