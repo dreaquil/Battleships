@@ -14,6 +14,11 @@ namespace Battleships {
     public:
         Coordinate(Row r, Column c);
 
+        Coordinate shiftDown(unsigned int nCol);
+        Coordinate shiftRight(unsigned int nRow);
+
+        bool isValid() const;
+
     private:
         Row row;
         Column column;

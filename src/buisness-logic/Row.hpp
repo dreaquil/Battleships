@@ -18,6 +18,9 @@ namespace Battleships {
         H,
         I,
         J,
+
+        nRow,
+        Invalid = -1,
     };
 
 }
