@@ -2,8 +2,8 @@
 // Created by david on 31/10/2020.
 //
 
-#ifndef BATTLESHIPS_GAMEMANAGEMENTCONTROLLER_HPP
-#define BATTLESHIPS_GAMEMANAGEMENTCONTROLLER_HPP
+#ifndef BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
+#define BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
 
 #include "service/GameManagementService.hpp"
 
@@ -15,25 +15,25 @@
 
 
 /**
- * Game Management REST controller.
+ * SessionManager Management REST controller.
  */
-class GameManagementController : public oatpp::web::server::api::ApiController {
+class SessionManagementController : public oatpp::web::server::api::ApiController {
 public:
-    GameManagementController(const std::shared_ptr<ObjectMapper>& objectMapper)
+    SessionManagementController(const std::shared_ptr<ObjectMapper>& objectMapper)
             : oatpp::web::server::api::ApiController(objectMapper)
     {}
 private:
     GameManagementService m_gameManagementService; // Create game service.
 public:
 
-    static std::shared_ptr<GameManagementController> createShared(
+    static std::shared_ptr<SessionManagementController> createShared(
             OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper) // Inject objectMapper component here as default parameter
     ){
-        return std::make_shared<GameManagementController>(objectMapper);
+        return std::make_shared<SessionManagementController>(objectMapper);
     }
 
     ENDPOINT_INFO(createGame) {
-            info->summary = "Create new Game";
+            info->summary = "Create new SessionManager";
 
             info->addConsumes<Object<GameDto>>("application/json");
 
@@ -48,7 +48,7 @@ public:
     }
 
     ENDPOINT_INFO(createPlayer) {
-        info->summary = "Create new Player";
+        info->summary = "Create new PlayerData";
 
         info->addConsumes<Object<PlayerDto>>("application/json");
 
@@ -77,4 +77,4 @@ public:
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- End Codegen
 
 
-#endif //BATTLESHIPS_GAMEMANAGEMENTCONTROLLER_HPP
+#endif //BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP

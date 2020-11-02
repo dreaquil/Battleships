@@ -18,7 +18,7 @@ oatpp::Object<GameDto> GameManagementService::getGameById(const oatpp::Int32& id
 
     auto dbResult = m_database->getGameById(id, connection);
     OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
-    OATPP_ASSERT_HTTP(dbResult->hasMoreToFetch(), Status::CODE_404, "Game not found");
+    OATPP_ASSERT_HTTP(dbResult->hasMoreToFetch(), Status::CODE_404, "SessionManager not found");
 
     auto result = dbResult->fetch<oatpp::Vector<oatpp::Object<GameDto>>>();
     OATPP_ASSERT_HTTP(result->size() == 1, Status::CODE_500, "Unknown error");
@@ -43,7 +43,7 @@ oatpp::Object<PlayerDto> GameManagementService::getPlayerById(const oatpp::Int32
 
     auto dbResult = m_database->getPlayerById(id, connection);
     OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
-    OATPP_ASSERT_HTTP(dbResult->hasMoreToFetch(), Status::CODE_404, "Player not found");
+    OATPP_ASSERT_HTTP(dbResult->hasMoreToFetch(), Status::CODE_404, "PlayerData not found");
 
     auto result = dbResult->fetch<oatpp::Vector<oatpp::Object<PlayerDto>>>();
     OATPP_ASSERT_HTTP(result->size() == 1, Status::CODE_500, "Unknown error");
