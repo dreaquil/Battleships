@@ -12,10 +12,10 @@
 #include "dto/ShipPositionDto.hpp"
 #include <array>
 
-class PlayerShipsDto : public oatpp::DTO {
+struct PlayerShipsDto : public oatpp::DTO {
 
 
-    std::array<ShipPositionDto,5> ships;
+
 
 };
 

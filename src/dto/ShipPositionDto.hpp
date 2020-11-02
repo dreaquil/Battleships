@@ -7,20 +7,22 @@
 
 #include <array>
 
-struct ShipPositionDto {
+#include "oatpp/core/macro/codegen.hpp"
+#include "oatpp/core/Types.hpp"
 
-    // e.g. For Coordinate B4 - { 'B', '4' }
-    char topLeftCoordinate[2] = {'-', '-'};
+#include OATPP_CODEGEN_BEGIN(DTO)
 
-    // 'H' - horizontal, 'V' - Vertical
-    char orientation = '-';
+class ShipPositionDto : public oatpp::DTO {
 
-    // Only 'A', 'B', 'C', 'D','S' are valid
-    char type = '-';
+    DTO_INIT(ShipPositionDto, DTO)
 
-    char topLeftCoordinateRow() const {return topLeftCoordinate[0];}
-    char topLeftCoordinateColumn() const {return topLeftCoordinate[1];}
+    DTO_FIELD(Int8, topLeftRow);
+    DTO_FIELD(Int8, topLeftColumn);
+    DTO_FIELD(Int8, orientation); // 'H' - horizontal, 'V' - Vertical
+    DTO_FIELD(Int8, type); // valid ship types are 'A', 'B', 'C', 'D', 'S'
 
 };
+
+#include OATPP_CODEGEN_END(DTO)
 
 #endif //BATTLESHIPS_SHIPPOSITIONDTO_HPP

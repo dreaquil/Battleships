@@ -79,12 +79,12 @@ namespace Battleships
     {}
 
     Ship::Ship(const ShipPositionDto &dto) :
-            _orientation(orientationFrom(dto.topLeftCoordinate[0])),
+            _orientation(orientationFrom(dto.orientation)),
             _type(typeFrom(dto.type)),
             _topLeftCoordinate(
                     Coordinate(
-                            rowFrom(dto.topLeftCoordinateRow()),
-                            columnFrom(dto.topLeftCoordinateColumn())))
+                            rowFrom(dto.topLeftRow),
+                            columnFrom(dto.topLeftColumn)))
     {}
 
     unsigned int Ship::size() const {
