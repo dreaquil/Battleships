@@ -42,7 +42,7 @@ namespace Battleships {
 
         // bool isSunk() const;
         // bool isOverlapsAnother() const; // intersects another ship
-        // bool isHangingOffEdge() const;
+        bool isHangingOffEdge() const;
 
     };
 }

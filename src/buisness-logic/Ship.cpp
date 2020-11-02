@@ -73,7 +73,9 @@ namespace Battleships
         return hasHorizontalOrientation() ? topLeftCoordinate().shiftRight(_size) : topLeftCoordinate().shiftDown(_size);
     }
 
-
+    bool Ship::isHangingOffEdge() const {
+        return bottomRightCoordinate().isValid();
+    }
 
 
 }
