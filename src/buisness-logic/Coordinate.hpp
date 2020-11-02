@@ -13,17 +13,18 @@ namespace Battleships {
     class Coordinate {
     public:
         Coordinate(Row r, Column c);
+        bool operator==(const Coordinate& other);
 
         Coordinate shiftDown(unsigned int nCol);
         Coordinate shiftRight(unsigned int nRow);
 
         bool isValid() const;
 
+        Coordinate() = delete;
+
     private:
         Row row;
         Column column;
-
-        Coordinate() = delete;
     };
 
 }

@@ -7,7 +7,14 @@
 namespace Battleships {
 
     Coordinate::Coordinate(Row r, Column c) : row(r), column(c)
-    {
+    {}
+
+    bool Coordinate::operator==(const Coordinate &other) {
+        return
+        this->isValid() &&
+        other.isValid() &&
+        this->row == other.row &&
+        this->column == other.column;
     }
 
     Coordinate Coordinate::shiftDown(unsigned int nCol) {
@@ -24,6 +31,22 @@ namespace Battleships {
         Column newColumn = iNewColumn>=static_cast<int>(Column::nColumn) ? Column::Invalid : static_cast<Column>(iNewColumn);
 
         return Coordinate(row, newColumn);
+    }
+
+    bool Coordinate::isValid() const {
+
+        return (row == Row::A ||
+                row == Row::B ||
+                row == Row::C ||
+                row == Row::D ||
+                row == Row::E ||
+                row == Row::F ||
+                row == Row::G ||
+                row == Row::H ||
+                row == Row::I ||
+                row == Row::J)
+                &&
+                (int(column) >= 0 && int(column) <= 9);
     }
 
 }
