@@ -5,8 +5,6 @@
 #ifndef BATTLESHIPS_SHIPPOSITIONDTO_HPP
 #define BATTLESHIPS_SHIPPOSITIONDTO_HPP
 
-#include <array>
-
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/core/Types.hpp"
 
