@@ -5,6 +5,8 @@
 #ifndef BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
 #define BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
 
+#include "buisness-logic/SessionManager.hpp"
+
 #include "service/GameManagementService.hpp"
 
 #include "oatpp/web/server/api/ApiController.hpp"
@@ -23,7 +25,9 @@ public:
             : oatpp::web::server::api::ApiController(objectMapper)
     {}
 private:
-    GameManagementService m_gameManagementService; // Create game service.
+
+    Battleships::SessionManager m_sessionManager;
+    [[ depricated ]] GameManagementService m_gameManagementService; // Create game service.
 public:
 
     static std::shared_ptr<SessionManagementController> createShared(
