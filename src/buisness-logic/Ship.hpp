@@ -36,6 +36,7 @@ namespace Battleships {
         };
 
         Ship(Type t, Coordinate topLeftCoordinate, Orientation orientation);
+        Ship(Type t, char topLeftRow, char topLeftColumn, char orientation);
         Ship(const ShipPositionDto& dto);
 
         unsigned int size() const;

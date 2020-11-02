@@ -4,6 +4,7 @@
 
 #include <unordered_map>
 #include "Ship.hpp"
+#include "dto/ShipPositionDto.hpp"
 
 namespace {
 
@@ -76,6 +77,12 @@ namespace Battleships
 
     Ship::Ship(Ship::Type t, Coordinate topLeftCoordinate, Orientation orientation)
     :  _type(t), _topLeftCoordinate(topLeftCoordinate), _orientation(orientation), _size(shipSizeMap.at(t))
+    {}
+
+    Ship::Ship(Type t, char topLeftRow, char topLeftColumn, char orientation) :
+            _topLeftCoordinate(Coordinate(rowFrom(topLeftRow),columnFrom(topLeftColumn))),
+            _orientation(orientationFrom(orientation)),
+            _type(t)
     {}
 
     Ship::Ship(const ShipPositionDto &dto) :

@@ -30,7 +30,7 @@ add_library(battleships-lib
         src/buisness-logic/Ship.cpp
         src/buisness-logic/Ship.hpp
         src/dto/PlayerShipPositionsDto.hpp
-        )
+        src/buisness-logic/PlayerShips.cpp src/buisness-logic/PlayerShips.hpp)
 
 ## include directories
 
