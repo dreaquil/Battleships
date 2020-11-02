@@ -45,13 +45,17 @@ namespace Battleships {
             REJECTED_UNRECOGNISED_PLAYER,
             REJECTED_USER_CANNOT_GUESS_NOW,
         };
-        GuessResponse guess(const PlayerData&, const std::string& username);
+        GuessResponse guess(unsigned int iPlayer, const std::string& username);
 
-        enum class TerminateResponse {
-            ACCEPTED_RESTART_SESSION,
-            REJECTED_UNRECOGNISED_PLAYER,
+        enum class TerminateGameResponse {
+            ACCEPTED_ABORTING_GAME,
         };
-        TerminateResponse terminate(const PlayerData&, const std::string& username);
+        TerminateResponse terminateGame();
+
+        enum class RestartResponse {
+            ACCEPTED_RESTART_SESSION,
+        };
+        TerminateResponse restartGame();
 
     private:
 
