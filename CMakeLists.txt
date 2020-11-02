@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 project(Battleships)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 add_library(battleships-lib
         src/controller/StaticController.hpp
@@ -30,7 +30,7 @@ add_library(battleships-lib
         src/buisness-logic/Ship.cpp
         src/buisness-logic/Ship.hpp
         src/dto/PlayerShipPositionsDto.hpp
-        src/buisness-logic/PlayerShips.cpp src/buisness-logic/PlayerShips.hpp src/buisness-logic/PlayerData.cpp src/buisness-logic/PlayerData.hpp src/buisness-logic/SessionManager.cpp src/buisness-logic/SessionManager.hpp)
+        src/buisness-logic/PlayerShipStore.cpp src/buisness-logic/PlayerShipStore.hpp src/buisness-logic/PlayerData.cpp src/buisness-logic/PlayerData.hpp src/buisness-logic/SessionManager.cpp src/buisness-logic/SessionManager.hpp)
 
 ## include directories
 
