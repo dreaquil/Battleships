@@ -6,7 +6,7 @@
 #define BATTLESHIPS_PLACESHIPSDTO_HPP
 
 #include "buisness-logic/Coordinate.hpp"
-#include "buisness-logic/Orientation.hpp"
+#include "buisness-logic/Ship.hpp"
 
 namespace Battleships {
 

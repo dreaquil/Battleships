@@ -8,10 +8,14 @@
 #include <string>;
 #include <memory>
 
-#include "buisness-logic/Orientation.hpp"
 #include "buisness-logic/Coordinate.hpp"
 
 namespace Battleships {
+
+    enum class Orientation {
+        Horizontal,
+        Vertical,
+    };
 
     class Ship {
     public:
@@ -26,23 +30,22 @@ namespace Battleships {
         };
 
         Ship(Type t, Coordinate topLeftCoordinate, Orientation orientation);
-
         char symbol() const;
-        char _symbol;
-
         unsigned int size() const;
-        unsigned int _size;
-
-        bool hasHorizontalOrientation() const;
-        Orientation _orientation;
-
         Coordinate topLeftCoordinate() const;
         Coordinate bottomRightCoordinate() const;
-        Coordinate _topLeftCoordinate;
 
         // bool isSunk() const;
         // bool isOverlapsAnother() const; // intersects another ship
         bool isHangingOffEdge() const;
+
+    private:
+
+        bool hasHorizontalOrientation() const;
+        char _symbol;
+        Orientation _orientation;
+        Coordinate _topLeftCoordinate;
+        unsigned int _size;
 
     };
 }
