@@ -1,26 +1,12 @@
-CREATE TABLE ship_classes
-(
-    id            INTEGER PRIMARY KEY,
-    name          VARCHAR,
-    symbol        VARCHAR,
-    size          VARCHAR
-);
-
-INSERT INTO ship_classes (id, name, symbol, size) VALUES (0, "Aircraft Carrier", "A", 5);
-INSERT INTO ship_classes (id, name, symbol, size) VALUES (1, "Battleship", "B", 4);
-INSERT INTO ship_classes (id, name, symbol, size) VALUES (2, "Cruiser", "C", 3);
-INSERT INTO ship_classes (id, name, symbol, size) VALUES (3, "Submarine", "S", 3);
-INSERT INTO ship_classes (id, name, symbol, size) VALUES (4, "Destroyer", "D", 2);
-
 CREATE TABLE ships (
     id                           INTEGER PRIMARY KEY,
     game_id                      VARCHAR,
     player_id                    VARCHAR,
-    class_id                     VARCHAR,
+    typw                         VARCHAR,
     top_left_row                 VARCHAR,
     top_left_column              VARCHAR,
     bottom_left_row              VARCHAR,
-    bottom_right_column          VARCHAR,
+    bottom_right_column          VARCHAR
 );
 
 CREATE TABLE games (
@@ -41,8 +27,8 @@ CREATE TABLE pegs
     id               INTEGER PRIMARY KEY,
     game_id          VARCHAR,
     player_id        VARCHAR,
-    row              VARCHAR,
-    column           VARCHAR,
+    _row              VARCHAR,
+    _column           VARCHAR,
     colour           VARCHAR
 );
 
