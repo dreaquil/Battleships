@@ -37,7 +37,8 @@ As soon as all of one player's ships have been sunk, the game ends.
 
 ## Overview
 
-
+- **No Unit Tests/CI**
+- **No interfaces/dependency injection, gratuitous use of oatpp framework**
 
 ---
 
