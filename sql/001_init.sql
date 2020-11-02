@@ -27,8 +27,8 @@ CREATE TABLE pegs
     id               INTEGER PRIMARY KEY,
     game_id          VARCHAR,
     player_id        VARCHAR,
-    row              VARCHAR,
-    column           VARCHAR,
+    _row              VARCHAR,
+    _column           VARCHAR,
     colour           VARCHAR
 );
 

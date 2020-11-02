@@ -40,16 +40,7 @@ namespace {
 
     Row rowFrom(char row){
         switch (row) {
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-            case 'G':
-            case 'H':
-            case 'I':
-            case 'J':
+            case '0'...'9' :
                 return Row(row);
             default :
                 return Row::Invalid;
@@ -94,6 +85,11 @@ namespace Battleships
                             columnFrom(dto.topLeftColumn)))
     {}
 
+
+    Orientation Ship::orientation() const {
+        return _orientation;
+    }
+
     unsigned int Ship::size() const {
         return _size;
     }
@@ -132,5 +128,6 @@ namespace Battleships
         _orientation == Orientation::Horizontal ||
         _orientation == Orientation::Vertical;
     }
+
 
 }

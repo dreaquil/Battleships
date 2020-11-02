@@ -6,47 +6,55 @@
 
 namespace Battleships {
 
-    Coordinate::Coordinate(Row r, Column c) : row(r), column(c)
+    Coordinate::Coordinate(Row r, Column c) : _row(r), _column(c)
     {}
 
     bool Coordinate::operator==(const Coordinate &other) {
         return
-        this->isValid() &&
-        other.isValid() &&
-        this->row == other.row &&
-        this->column == other.column;
+                this->isValid() &&
+                other.isValid() &&
+                this->_row == other._row &&
+                this->_column == other._column;
     }
 
     Coordinate Coordinate::shiftDown(unsigned int nCol) {
 
-        int iNewRow = static_cast<int>(row) + nCol;
+        int iNewRow = static_cast<int>(_row) + nCol;
         Row newRow = iNewRow>=static_cast<int>(Row::nRow) ? Row::Invalid : static_cast<Row>(iNewRow);
 
-        return Coordinate(newRow, column);
+        return Coordinate(newRow, _column);
     }
 
     Coordinate Coordinate::shiftRight(unsigned int nRow) {
 
-        int iNewColumn = static_cast<int>(column) + nRow;
+        int iNewColumn = static_cast<int>(_column) + nRow;
         Column newColumn = iNewColumn>=static_cast<int>(Column::nColumn) ? Column::Invalid : static_cast<Column>(iNewColumn);
 
-        return Coordinate(row, newColumn);
+        return Coordinate(_row, newColumn);
     }
 
     bool Coordinate::isValid() const {
 
-        return (row == Row::A ||
-                row == Row::B ||
-                row == Row::C ||
-                row == Row::D ||
-                row == Row::E ||
-                row == Row::F ||
-                row == Row::G ||
-                row == Row::H ||
-                row == Row::I ||
-                row == Row::J)
+        return (_row == Row::A ||
+                _row == Row::B ||
+                _row == Row::C ||
+                _row == Row::D ||
+                _row == Row::E ||
+                _row == Row::F ||
+                _row == Row::G ||
+                _row == Row::H ||
+                _row == Row::I ||
+                _row == Row::J)
                 &&
-                (int(column) >= 0 && int(column) <= 9);
+                (int(_column) >= 0 && int(_column) <= 9);
+    }
+
+    Row Coordinate::row() const {
+        return _row;
+    }
+
+    Column Coordinate::column() const {
+        return _column;
     }
 
 }

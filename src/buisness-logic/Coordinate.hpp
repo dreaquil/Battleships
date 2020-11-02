@@ -19,12 +19,14 @@ namespace Battleships {
         Coordinate shiftRight(unsigned int nRow);
 
         bool isValid() const;
+        Row row() const;
+        Column column() const;
 
         Coordinate() = delete;
 
     private:
-        Row row;
-        Column column;
+        Row _row;
+        Column _column;
     };
 
 }
