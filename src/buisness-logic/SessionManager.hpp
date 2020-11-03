@@ -10,6 +10,7 @@
 #include "dto/AddPlayerDto.hpp"
 #include "dto/PlayerShipPositionsDto.hpp"
 #include "dto/PlayerGuessDto.hpp"
+#include "dto/GameRestartDto.hpp"
 
 #include "buisness-logic/PlayerData.hpp"
 #include "buisness-logic/PlayerShipStore.hpp"
@@ -52,15 +53,11 @@ namespace Battleships {
         };
         GuessResponse playerGuess(const PlayerGuessDto& dto);
 
-        enum class TerminateGameResponse {
-            ACCEPTED_ABORTING_GAME,
-        };
-        TerminateGameResponse terminateGame();
-
         enum class RestartResponse {
             ACCEPTED_RESTART_SESSION,
+            REJECTED_UNRECOGNISED_PLAYER,
         };
-        RestartResponse restartGame();
+        RestartResponse restartGame(const GameRestartDto& dto);
 
         enum class GameState : int {
             WAITING_FOR_PLAYER = 1,

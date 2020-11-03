@@ -86,7 +86,19 @@ public:
         return createDtoResponse(Status::CODE_200, m_gameManagementService.playerGuess(dto));
     }
 
+    ENDPOINT_INFO(restart_game) {
+        info->summary = "Terminates the current game";
 
+        info->addConsumes<Object<GameRestartDto>>("application/json");
+
+        info->addResponse<Object<StatusDto>>(Status::CODE_200, "application/json");
+        info->addResponse<Object<StatusDto>>(Status::CODE_417, "application/json");
+        info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
+    }
+    ENDPOINT("POST", "restart_game", restart_game, BODY_DTO(Object<GameRestartDto>, dto))
+    {
+        return createDtoResponse(Status::CODE_200, m_gameManagementService.restartGame(dto));
+    }
 
 
 

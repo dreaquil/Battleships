@@ -111,4 +111,8 @@ namespace Battleships {
         return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER; // todo
     }
 
+    SessionManager::RestartResponse SessionManager::restartGame(const GameRestartDto &dto) {
+        return SessionManager::RestartResponse::ACCEPTED_RESTART_SESSION; // todo
+    }
+
 }

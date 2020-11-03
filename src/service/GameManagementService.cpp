@@ -111,6 +111,29 @@ oatpp::Object<PlayerGuessDto> GameManagementService::playerGuess(const oatpp::Ob
 }
 
 
+oatpp::Object<StatusDto> GameManagementService::restartGame(const oatpp::Object<GameRestartDto> &dto) {
+
+    using InternalResponse = Battleships::SessionManager::RestartResponse;
+
+    auto ir = m_sessionManager.restartGame(UNWRAP(dto));
+    auto ExternalResponse = oatpp::Object<StatusDto>::createShared();
+
+    switch (ir) {
+        case InternalResponse::ACCEPTED_RESTART_SESSION : {
+            ExternalResponse->status = "OK";
+            ExternalResponse->code = 417;
+            ExternalResponse->message = "Permission denied";
+        }
+        case InternalResponse::REJECTED_UNRECOGNISED_PLAYER :
+        default: {
+            ExternalResponse->status = "OK";
+            ExternalResponse->code = 200;
+            ExternalResponse->message = "Session was restarted";
+        }
+    }
+    return ExternalResponse;
+}
+
 
 
 
