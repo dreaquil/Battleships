@@ -2,6 +2,7 @@
 // Created by david on 03/11/2020.
 //
 
+#include <algorithm>
 #include "CoordinateLine.hpp"
 #include "buisness-logic/Orientation.hpp"
 
@@ -39,3 +40,20 @@ bool Battleships::CoordinateLine::isValid() const { return _data.empty(); }
 Battleships::CoordinateLine::const_iterator Battleships::CoordinateLine::begin() const { return _data.begin(); }
 
 Battleships::CoordinateLine::const_iterator Battleships::CoordinateLine::end() const { return _data.end(); }
+
+bool Battleships::CoordinateLine::overlaps(Battleships::CoordinateLine) const {
+
+    this->sort();
+
+    return false;
+}
+
+bool Battleships::CoordinateLine::isSorted() const { return std::is_sorted(_data.begin(),_data.end()); }
+
+void Battleships::CoordinateLine::sort() const {
+    if(!this->isSorted())
+    {
+        //std::sort(_data.begin(),_data.end());
+    }
+}
+

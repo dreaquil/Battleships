@@ -20,7 +20,11 @@ namespace Battleships {
         const_iterator begin() const;
         const_iterator end() const;
 
+        bool overlaps(CoordinateLine) const;
+
     private:
+        bool isSorted() const;
+        void sort() const;
         std::vector<Coordinate> _data;
     };
 
