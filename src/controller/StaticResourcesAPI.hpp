@@ -9,17 +9,17 @@
 
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
-class StaticController : public oatpp::web::server::api::ApiController {
+class StaticResourcesAPI : public oatpp::web::server::api::ApiController {
 public:
-  StaticController(const std::shared_ptr<ObjectMapper>& objectMapper)
+  StaticResourcesAPI(const std::shared_ptr<ObjectMapper>& objectMapper)
     : oatpp::web::server::api::ApiController(objectMapper)
   {}
 public:
 
-  static std::shared_ptr<StaticController> createShared(
+  static std::shared_ptr<StaticResourcesAPI> createShared(
     OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper) // Inject objectMapper component here as default parameter
   ){
-    return std::make_shared<StaticController>(objectMapper);
+    return std::make_shared<StaticResourcesAPI>(objectMapper);
   }
 
   ENDPOINT("GET", "/", root) {

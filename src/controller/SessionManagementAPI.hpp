@@ -5,7 +5,7 @@
 #ifndef BATTLESHIPS_SESSIONMANAGEMENTAPI_HPP
 #define BATTLESHIPS_SESSIONMANAGEMENTAPI_HPP
 
-#include "service/SessionManagementService.hpp"
+#include "SessionManagementService.hpp"
 
 #include "oatpp/web/server/api/ApiController.hpp"
 #include "oatpp/parser/json/mapping/ObjectMapper.hpp"
@@ -36,7 +36,7 @@ public:
     ENDPOINT_INFO(session_summary) {
         info->summary = "get game summary data";
 
-        info->addResponse<oatpp::Object<PlayersPageDto>>(Status::CODE_200, "application/json");
+        info->addResponse<oatpp::Object<SessionSummaryDto>>(Status::CODE_200, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
     }
     ENDPOINT("GET", "session_summary", session_summary)
@@ -98,32 +98,6 @@ public:
     ENDPOINT("POST", "restart_game", restart_game, BODY_DTO(Object<GameRestartDto>, dto))
     {
         return createDtoResponse(Status::CODE_200, m_gameManagementService.restartGame(dto));
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    ENDPOINT_INFO(createGame) {
-            info->summary = "Create new SessionManager";
-
-            info->addConsumes<Object<GameDto>>("application/json");
-
-            info->addResponse<Object<GameDto>>(Status::CODE_200, "application/json");
-            info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
-            info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
-    }
-    ENDPOINT("POST", "game", createGame,
-    BODY_DTO(Object<GameDto>, gameDto))
-    {
-        return createDtoResponse(Status::CODE_200, m_gameManagementService.createGame(gameDto));
     }
 
 };

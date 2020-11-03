@@ -4,7 +4,6 @@
 
 #include "dto/AddPlayerDto.hpp"
 #include "dto/GameDto.hpp"
-#include "dto/UserDto.hpp"
 #include "oatpp-sqlite/orm.hpp"
 
 #include OATPP_CODEGEN_BEGIN(DbClient) //<- Begin Codegen
@@ -29,47 +28,6 @@ public:
 
     }
 
-    QUERY(createUser,
-          "INSERT INTO AppUser"
-          "(username, email, password, role) VALUES "
-          "(:user.username, :user.email, :user.password, :user.role);",
-          PARAM(oatpp::Object<UserDto>, user))
-
-    QUERY(updateUser,
-          "UPDATE AppUser "
-          "SET "
-          " username=:user.username, "
-          " email=:user.email, "
-          " password=:user.password, "
-          " role=:user.role "
-          "WHERE "
-          " id=:user.id;",
-          PARAM(oatpp::Object<UserDto>, user))
-
-    QUERY(getUserById,
-          "SELECT * FROM AppUser WHERE id=:id;",
-          PARAM(oatpp::Int32, id))
-
-    QUERY(getAllUsers,
-          "SELECT * FROM AppUser LIMIT :limit OFFSET :offset;",
-          PARAM(oatpp::UInt32, offset),
-          PARAM(oatpp::UInt32, limit))
-
-    QUERY(deleteUserById,
-          "DELETE FROM AppUser WHERE id=:id;",
-          PARAM(oatpp::Int32, id))
-
-
-    QUERY(createGame,
-          "INSERT INTO games"
-          "(status) VALUES "
-          "(:game.status);",
-          PARAM(oatpp::Object<GameDto>, game))
-
-    QUERY(getGameById,
-          "SELECT * FROM games WHERE id=:id;",
-          PARAM(oatpp::Int32, id))
-
     QUERY(createPlayer,
           "INSERT INTO players"
           "(name) VALUES "
@@ -82,7 +40,6 @@ public:
 
     QUERY(getAllPlayers,
           "SELECT * FROM players")
-
 
 };
 

@@ -4,17 +4,12 @@ project(Battleships)
 set(CMAKE_CXX_STANDARD 17)
 
 add_library(battleships-lib
-        src/controller/StaticController.hpp
-        src/controller/UserController.hpp
+        src/controller/StaticResourcesAPI.hpp
         src/db/GameStateDbClient.hpp
-        src/dto/PageDto.hpp
         src/dto/GameDto.hpp
         src/dto/StatusDto.hpp
-        src/dto/UserDto.hpp
-        src/service/UserService.cpp
-        src/service/UserService.hpp
-        src/service/SessionManagementService.cpp
-        src/service/SessionManagementService.hpp
+        src/controller/SessionManagementService.cpp
+        src/controller/SessionManagementService.hpp
         src/AppComponent.hpp
         src/DatabaseComponent.hpp
         src/SwaggerComponent.hpp

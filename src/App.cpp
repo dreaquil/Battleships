@@ -2,8 +2,7 @@
 #include "AppComponent.hpp"
 
 #include "controller/SessionManagementAPI.hpp"
-#include "controller/UserController.hpp"
-#include "controller/StaticController.hpp"
+#include "controller/StaticResourcesAPI.hpp"
 
 #include "oatpp-swagger/Controller.hpp"
 
@@ -20,20 +19,15 @@ void run() {
   auto router = components.httpRouter.getObject();
   auto docEndpoints = oatpp::swagger::Controller::Endpoints::createShared();
   
-  auto userController = UserController::createShared();
-  userController->addEndpointsToRouter(router);
-  
-  docEndpoints->pushBackAll(userController->getEndpoints());
-  
-  auto gameController = SessionManagementAPI::createShared();
-  gameController->addEndpointsToRouter(router);
+  auto sessionManagementController = SessionManagementAPI::createShared();
+    sessionManagementController->addEndpointsToRouter(router);
 
-  docEndpoints->pushBackAll(gameController->getEndpoints());
+  docEndpoints->pushBackAll(sessionManagementController->getEndpoints());
 
   auto swaggerController = oatpp::swagger::Controller::createShared(docEndpoints);
   swaggerController->addEndpointsToRouter(router);
 
-  auto staticController = StaticController::createShared();
+  auto staticController = StaticResourcesAPI::createShared();
   staticController->addEndpointsToRouter(router);
   
   /* create server */
