@@ -99,33 +99,7 @@ public:
     {
         return createDtoResponse(Status::CODE_200, m_gameManagementService.restartGame(dto));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    ENDPOINT_INFO(createGame) {
-            info->summary = "Create new SessionManager";
-
-            info->addConsumes<Object<GameDto>>("application/json");
-
-            info->addResponse<Object<GameDto>>(Status::CODE_200, "application/json");
-            info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
-            info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
-    }
-    ENDPOINT("POST", "game", createGame,
-    BODY_DTO(Object<GameDto>, gameDto))
-    {
-        return createDtoResponse(Status::CODE_200, m_gameManagementService.createGame(gameDto));
-    }
-
+    
 };
 
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- End Codegen
