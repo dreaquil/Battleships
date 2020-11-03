@@ -108,7 +108,7 @@ namespace Battleships {
     }
 
     SessionManager::GuessResponse SessionManager::playerGuess(const PlayerGuessDto &dto) {
-        return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER;
+        return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER; // todo
     }
 
 }
