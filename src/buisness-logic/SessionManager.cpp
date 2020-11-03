@@ -66,6 +66,28 @@ namespace Battleships {
         }
     }
 
+    SessionManager::GameState SessionManager::gameState() const {
+        return _state;
+    }
+
+    std::string SessionManager::gameStateDescription() const {
+        switch (_state) {
+            case GameState::WAITING_FOR_PLAYER :
+                return "waiting for players joining...";
+            case GameState::PLACING_SHIPS :
+                return "waiting for players to layout ships...";
+            case GameState::PLAYER_1_TURN :
+                return std::string("waiting for ") + players[0].username() + std::string(" to guess...");
+            case GameState::PLAYER_2_TURN :
+                return std::string("waiting for ") + players[1].username() + std::string(" to guess...");
+            case GameState::TERMINATED :
+                return "Game Over";
+            default :
+                return "<unknown>";
+        };
+        return std::__cxx11::string();
+    }
+
     bool SessionManager::hasPlayer(const std::string &username) const {
         const auto& it = std::find_if(players.begin(), players.end(), [&username](const PlayerData &p){ return p.username() == username;});
         return it!=players.end();
@@ -78,6 +100,10 @@ namespace Battleships {
     int SessionManager::getPlayerId(const std::string &username) const {
         const auto& it = std::find_if(players.begin(), players.end(), [&username](const PlayerData &p){ return p.username() == username;});
         return it!=players.end() ? it->id() : -1;
+    }
+
+    std::string SessionManager::getPlayerName(int id) const {
+        return id>0 && id<2 ? players[id].username() : std::string("<not-found>");
     }
 
 }

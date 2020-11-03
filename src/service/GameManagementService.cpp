@@ -6,15 +6,22 @@
 
 oatpp::Object<SessionSummaryDto> GameManagementService::sessionSummary() {
 
-    using InternalResponse = Battleships::SessionManager::AddPlayerResponse;
-
     int nPlayer = m_sessionManager.nPlayers();
-
+    bool player1Joined = nPlayer > 0;
+    bool player2Joined = nPlayer > 1;
 
     oatpp::Object<SessionSummaryDto> ExternalResponse;
-    ExternalResponse->iPlayer = 1;
-    ExternalResponse->waitingForOpponent = false;
-    ExternalResponse->waitingForOpponent = false;
+
+    ExternalResponse->player1Joined = player1Joined;
+    ExternalResponse->idPlayer1 = player1Joined ? 0 : -1;
+    ExternalResponse->namePlayer1 = m_sessionManager.getPlayerName(0).c_str();
+
+    ExternalResponse->player2Joined = player2Joined;
+    ExternalResponse->idPlayer2 = player2Joined ? 1 : -1;
+    ExternalResponse->namePlayer2 = m_sessionManager.getPlayerName(1).c_str();
+
+    ExternalResponse->gameStatus = int(m_sessionManager.gameState());
+    ExternalResponse->gameStatusDescription = m_sessionManager.gameStateDescription().c_str();
 
     return ExternalResponse;
 }

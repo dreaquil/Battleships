@@ -14,10 +14,16 @@ class SessionSummaryDto : public oatpp::DTO {
 
     DTO_INIT(SessionSummaryDto, DTO)
 
-    DTO_FIELD(UInt32, iPlayer, "your_player_no");
-    DTO_FIELD(Boolean, waitingForOpponent, "found_opponent");
-    DTO_FIELD(String, opponentUserName, "opponent");
+    DTO_FIELD(Boolean, player1Joined, "player1_joined");
+    DTO_FIELD(UInt32, idPlayer1, "player1_id");
+    DTO_FIELD(String, namePlayer1, "player1_name");
 
+    DTO_FIELD(Boolean, player2Joined, "player2_joined");
+    DTO_FIELD(UInt32, idPlayer2, "player2_id");
+    DTO_FIELD(String, namePlayer2, "player2_name");
+
+    DTO_FIELD(UInt32, gameStatus, "game_status_code");
+    DTO_FIELD(String, gameStatusDescription, "game_status_description");
 };
 
 #include OATPP_CODEGEN_END(DTO)

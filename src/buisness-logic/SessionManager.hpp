@@ -60,21 +60,25 @@ namespace Battleships {
         };
         RestartResponse restartGame();
 
+        enum class GameState : int {
+            WAITING_FOR_PLAYER = 1,
+            PLACING_SHIPS = 2,
+            PLAYER_1_TURN = 3,
+            PLAYER_2_TURN = 4,
+            TERMINATED = 5,
+        };
+        SessionManager::GameState gameState() const;
+        std::string gameStateDescription() const;
+
         bool hasPlayer(const std::string &username) const;
         int getPlayerId(const std::string &username) const;
+        std::string getPlayerName(int id) const;
         unsigned int nPlayers() const;
 
+
     private:
-
+        GameState _state = GameState::WAITING_FOR_PLAYER;
         std::vector<PlayerData> players;
-
-        enum class GameState {
-            WAITING_FOR_PLAYER,
-            PLACING_SHIPS,
-            PLAYER_1_TURN,
-            PLAYER_2_TURN,
-            TERMINATED,
-        } _state = GameState::WAITING_FOR_PLAYER;
     };
 
 }

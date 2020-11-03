@@ -27,7 +27,7 @@ namespace Battleships {
 
     private:
 
-        [[deprcated]] unsigned int _id;
+        unsigned int _id;
         std::string _username;
         bool isPlayerOne;
         std::unique_ptr<PlayerShipStore> shipsStore;
