@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include "Ship.hpp"
 #include "dto/ShipPositionDto.hpp"
+#include "CoordinateLine.hpp"
 
 namespace {
 
@@ -127,6 +128,13 @@ namespace Battleships
         return
         _orientation == Orientation::Horizontal ||
         _orientation == Orientation::Vertical;
+    }
+
+    bool Ship::isOverLapping(const Ship& other) const {
+        CoordinateLine thisFootprint(this->topLeftCoordinate(), this->bottomRightCoordinate());
+        CoordinateLine otherFootprint(other.topLeftCoordinate(), other.bottomRightCoordinate());
+
+        if (thisFootprint.overlaps(otherFootprint)) return false;
     }
 
 

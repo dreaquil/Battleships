@@ -45,46 +45,12 @@ bool Battleships::PlayerShipStore::isValid() const {
     if (std::any_of(_ships.begin(),_ships.end(),[](const Ship& s){return !s.isValid();}))
         return false;
 
-    return true;
-
-    // Nasty - C masks?...
-    /*
-    {
-        bool overlap[10][10] = {false};  // could return an error cell dto
-        bool occupied[10][10] = {false};
-
-        for (const auto &ship : _ships) {
-
-            bool position[10][10] = {false};
-
-            int iRow = int(ship.topLeftCoordinate().row());
-            int iCol = int(ship.topLeftCoordinate().column());
-
-            switch (ship.orientation()) {
-                case Ship::Orientation::Horizontal :
-                {
-                    int colFinal = int(ship.bottomRightCoordinate().column());
-                    for (;iCol<colFinal;++iCol)
-                    {
-                        position[iRow][iCol] = true;
-                    }
-                    break;
-                }
-                case Ship::Orientation::Vertical :
-                {
-                    int rowFinal = int(ship.bottomRightCoordinate().row());
-                    for (;iRow<rowFinal;++iRow)
-                    {
-                        position[iRow][iCol] = true;
-                    }
-                    break;
-                }
-                default:
-                    return false;
-            }
-
-
+    // Too dirty... check of ship overlaps
+    for(auto aIter = _ships.begin(); aIter<_ships.end(); ++aIter){
+        for(auto bIter = aIter+1; bIter<_ships.end(); ++bIter){
+            if (aIter->isOverLapping(*bIter)) return false;
         }
     }
-     */
+
+    return true;
 }

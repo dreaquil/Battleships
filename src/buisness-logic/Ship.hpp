@@ -43,6 +43,7 @@ namespace Battleships {
         bool isHangingOffEdge() const;
         bool hasValidType() const;
         bool hasValidOrientation() const;
+        bool isOverLapping(const Ship& other) const;
 
     private:
 

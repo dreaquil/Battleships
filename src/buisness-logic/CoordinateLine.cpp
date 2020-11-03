@@ -74,7 +74,7 @@ Battleships::CoordinateLine::const_iterator Battleships::CoordinateLine::end() c
 
 bool Battleships::CoordinateLine::overlaps(const Battleships::CoordinateLine &other) const {
 
-    return haveMatchingCoordinates(*this, other)
+    return haveMatchingCoordinates(*this, other);
 }
 
 unsigned int Battleships::CoordinateLine::size() const { return _data.size(); }
