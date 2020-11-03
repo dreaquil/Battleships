@@ -9,7 +9,7 @@
 namespace {
 
     using Type = Battleships::Ship::Type;
-    using Orientation = Battleships::Ship::Orientation;
+    using Orientation = Battleships::Orientation;
     using Row = Battleships::Row;
     using Column = Battleships::Column;
 

@@ -99,7 +99,7 @@ public:
     {
         return createDtoResponse(Status::CODE_200, m_gameManagementService.restartGame(dto));
     }
-    
+
 };
 
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- End Codegen

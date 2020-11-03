@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "buisness-logic/Coordinate.hpp"
+#include "buisness-logic/Orientation.hpp"
 #include "dto/ShipPositionDto.hpp"
 
 namespace Battleships {
@@ -26,13 +27,6 @@ namespace Battleships {
 
             nType = 5,
             Invalid,
-        };
-
-        enum class Orientation : char {
-            Horizontal = 'H',
-            Vertical = 'V',
-
-            Invalid = '-',
         };
 
         Ship(Type t, Coordinate topLeftCoordinate, Orientation orientation);
