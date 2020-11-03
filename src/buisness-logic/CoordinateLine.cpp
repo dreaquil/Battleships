@@ -8,20 +8,30 @@
 
 namespace
 {
-    bool isSorted(Battleships::CoordinateLine l){ return std::is_sorted(l.begin(),l.end()); }
+    bool isSorted(const Battleships::CoordinateLine& l){ return std::is_sorted(l.begin(),l.end()); }
 
-    std::vector<Battleships::Coordinate> sort(Battleships::CoordinateLine l){
+    std::vector<Battleships::Coordinate> getSortCoordinates(const Battleships::CoordinateLine& l){
 
-        std::vector<Battleships::Coordinate> vec(l.size(),
-                Battleships::Coordinate(
-                        Battleships::Row::Invalid,
-                        Battleships::Column::Invalid));
-
+        using namespace Battleships;
+        std::vector<Coordinate> vec(l.size(),Coordinate(Row::Invalid,Column::Invalid));
         std::copy(l.begin(),l.end(),vec.begin());
         std::sort(vec.begin(),vec.end());
+
         return vec;
     }
+
+    bool haveMatchingCoordinates(const Battleships::CoordinateLine& a, const Battleships::CoordinateLine& b) {
+
+        using namespace Battleships;
+        std::vector<Coordinate> buffer(a.size()+b.size(),Coordinate(Row::Invalid,Column::Invalid));
+        std::vector<Coordinate>::iterator it;
+        it = std::set_union (a.begin(), a.end(), b.begin(), b.end(), buffer.begin());
+
+        return std::distance(buffer.begin(),it)>0;
+    }
+
 }
+
 
 Battleships::CoordinateLine::CoordinateLine(Battleships::Coordinate front, Battleships::Coordinate back)
 {
@@ -52,17 +62,19 @@ Battleships::CoordinateLine::CoordinateLine(Battleships::Coordinate front, Battl
     }
 }
 
+
 bool Battleships::CoordinateLine::isValid() const { return _data.empty(); }
+
 
 Battleships::CoordinateLine::const_iterator Battleships::CoordinateLine::begin() const { return _data.begin(); }
 
+
 Battleships::CoordinateLine::const_iterator Battleships::CoordinateLine::end() const { return _data.end(); }
 
-bool Battleships::CoordinateLine::overlaps(Battleships::CoordinateLine) const {
 
-    this->sort();
+bool Battleships::CoordinateLine::overlaps(const Battleships::CoordinateLine &other) const {
 
-    return false;
+    return haveMatchingCoordinates(*this, other)
 }
 
 unsigned int Battleships::CoordinateLine::size() const { return _data.size(); }
