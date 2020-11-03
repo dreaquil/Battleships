@@ -4,7 +4,7 @@
 
 #include "UserDto.hpp"
 #include "GameDto.hpp"
-#include "PlayerDto.hpp"
+#include "AddPlayerDto.hpp"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
@@ -32,9 +32,9 @@ class GamesPageDto : public PageDto<oatpp::Object<GameDto>> {
 
 };
 
-class PlayersPageDto : public PageDto<oatpp::Object<PlayerDto>> {
+class PlayersPageDto : public PageDto<oatpp::Object<AddPlayerDto>> {
 
-    DTO_INIT(PlayersPageDto, PageDto<oatpp::Object<PlayerDto>>)
+    DTO_INIT(PlayersPageDto, PageDto<oatpp::Object<AddPlayerDto>>)
 
 };
 

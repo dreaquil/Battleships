@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 project(Battleships)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 add_library(battleships-lib
         src/controller/StaticController.hpp
@@ -13,15 +13,15 @@ add_library(battleships-lib
         src/dto/UserDto.hpp
         src/service/UserService.cpp
         src/service/UserService.hpp
-        src/service/GameManagementService.cpp
-        src/service/GameManagementService.hpp
+        src/service/SessionManagementService.cpp
+        src/service/SessionManagementService.hpp
         src/AppComponent.hpp
         src/DatabaseComponent.hpp
         src/SwaggerComponent.hpp
         src/ErrorHandler.cpp
         src/ErrorHandler.hpp
-        src/controller/SessionManagementController.hpp
-        src/dto/PlayerDto.hpp
+        src/controller/SessionManagementAPI.hpp
+        src/dto/AddPlayerDto.hpp
         src/buisness-logic/Coordinate.hpp
         src/dto/ShipPositionDto.hpp
         src/buisness-logic/Row.hpp
@@ -30,7 +30,14 @@ add_library(battleships-lib
         src/buisness-logic/Ship.cpp
         src/buisness-logic/Ship.hpp
         src/dto/PlayerShipPositionsDto.hpp
-        src/buisness-logic/PlayerShips.cpp src/buisness-logic/PlayerShips.hpp src/buisness-logic/PlayerData.cpp src/buisness-logic/PlayerData.hpp src/buisness-logic/SessionManager.cpp src/buisness-logic/SessionManager.hpp)
+        src/buisness-logic/PlayerShipStore.cpp
+        src/buisness-logic/PlayerShipStore.hpp
+        src/buisness-logic/PlayerData.cpp
+        src/buisness-logic/PlayerData.hpp
+        src/buisness-logic/SessionManager.cpp
+        src/buisness-logic/SessionManager.hpp
+        src/dto/SessionSummaryDto.hpp
+        src/dto/PlayerGuessDto.hpp src/dto/GameRestartDto.hpp)
 
 ## include directories
 

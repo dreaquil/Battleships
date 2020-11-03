@@ -7,8 +7,13 @@
 
 #include <memory>
 
+#include "dto/AddPlayerDto.hpp"
+#include "dto/PlayerShipPositionsDto.hpp"
+#include "dto/PlayerGuessDto.hpp"
+#include "dto/GameRestartDto.hpp"
+
 #include "buisness-logic/PlayerData.hpp"
-#include "buisness-logic/PlayerShips.hpp"
+#include "buisness-logic/PlayerShipStore.hpp"
 
 
 
@@ -23,45 +28,56 @@ namespace Battleships {
             REJECTED_SESSION_FULL,
             REJECTED_USER_ALREADY_REGISTERED,
             REJECTED_SESSION_IN_PROGRESS,
+            UNSPECIFIED_ERROR,
         };
-        AddPlayerResponse addPlayer(const PlayerData& p);
+        AddPlayerResponse addPlayer(const AddPlayerDto &dto);
 
         enum class ShipPlacementResponse {
-            ACCEPTED_UPDATED_SHIP_POSITIONS,
+            ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER,
+            ACCEPTED_UPDATED_SHIP_POSITIONS_GAME_STARTING,
             REJECTED_INVALID_LAYOUT,
             REJECTED_UNRECOGNISED_PLAYER,
             REJECTED_CANNOT_PLACE_SHIPS_NOW,
+            UNSPECIFIED_ERROR,
         };
-        ShipPlacementResponse placeShips(const PlayerData& p, PlayerShips& ships);
+        ShipPlacementResponse placeShips(const PlayerShipPositionsDto &dto);
 
         enum class GuessResponse {
             ACCEPTED_HIT,
             ACCEPTED_HIT_AND_SUNK,
             ACCEPTED_HIT_AND_SUNK_WIN_CONDITION,
+            ACCEPTED_MISS,
             REJECTED_INVALID_COORDINATE,
             REJECTED_UNRECOGNISED_PLAYER,
             REJECTED_USER_CANNOT_GUESS_NOW,
         };
-        GuessResponse guess(const PlayerData&, const std::string& username);
+        GuessResponse playerGuess(const PlayerGuessDto& dto);
 
-        enum class TerminateResponse {
+        enum class RestartResponse {
             ACCEPTED_RESTART_SESSION,
             REJECTED_UNRECOGNISED_PLAYER,
         };
-        TerminateResponse terminate(const PlayerData&, const std::string& username);
+        RestartResponse restartGame(const GameRestartDto& dto);
+
+        enum class GameState : int {
+            WAITING_FOR_PLAYER = 1,
+            PLACING_SHIPS = 2,
+            PLAYER_1_TURN = 3,
+            PLAYER_2_TURN = 4,
+            TERMINATED = 5,
+        };
+        SessionManager::GameState gameState() const;
+        std::string gameStateDescription() const;
+
+        bool hasPlayer(const std::string &username) const;
+        int getPlayerId(const std::string &username) const;
+        std::string getPlayerName(int id) const;
+        unsigned int nPlayers() const;
+
 
     private:
-
-        std::unique_ptr<PlayerData> p1;
-        std::unique_ptr<PlayerData> P2;
-
-        enum class GameState {
-            WAITING_FOR_PLAYER_ONE,
-            PLACING_SHIPS,
-            PLAYER_1_TURN,
-            PLAYER_2_TURN,
-            TERMINATED,
-        } _state = GameState::WAITING_FOR_PLAYER_ONE;
+        GameState _state = GameState::WAITING_FOR_PLAYER;
+        std::vector<PlayerData> players;
     };
 
 }

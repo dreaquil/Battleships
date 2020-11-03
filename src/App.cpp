@@ -1,7 +1,7 @@
 
 #include "AppComponent.hpp"
 
-#include "controller/SessionManagementController.hpp"
+#include "controller/SessionManagementAPI.hpp"
 #include "controller/UserController.hpp"
 #include "controller/StaticController.hpp"
 
@@ -25,7 +25,7 @@ void run() {
   
   docEndpoints->pushBackAll(userController->getEndpoints());
   
-  auto gameController = SessionManagementController::createShared();
+  auto gameController = SessionManagementAPI::createShared();
   gameController->addEndpointsToRouter(router);
 
   docEndpoints->pushBackAll(gameController->getEndpoints());

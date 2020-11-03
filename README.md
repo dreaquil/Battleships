@@ -37,7 +37,12 @@ As soon as all of one player's ships have been sunk, the game ends.
 
 ## Overview
 
+Limitations:
+- **No Unit Tests/CI**
+- **No interfaces/dependency injection, gratuitous use of oatpp framework**
 
+References:
+- https://www.tutorialspoint.com/http/http_methods.htm
 
 ---
 

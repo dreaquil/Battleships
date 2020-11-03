@@ -3,11 +3,11 @@
 //
 
 #include <algorithm>
-#include "PlayerShips.hpp"
+#include "PlayerShipStore.hpp"
 #include "buisness-logic/Coordinate.hpp"
 
 
-Battleships::PlayerShips::PlayerShips(const PlayerShipPositionsDto& dto) :
+Battleships::PlayerShipStore::PlayerShipStore(const PlayerShipPositionsDto& dto) :
 _ships(
         {
             {
@@ -40,7 +40,7 @@ _ships(
         })
         {}
 
-bool Battleships::PlayerShips::areValid() const {
+bool Battleships::PlayerShipStore::isValid() const {
 
     if (std::any_of(_ships.begin(),_ships.end(),[](const Ship& s){return !s.isValid();}))
         return false;

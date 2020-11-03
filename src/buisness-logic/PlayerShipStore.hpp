@@ -2,8 +2,8 @@
 // Created by david on 02/11/2020.
 //
 
-#ifndef BATTLESHIPS_PLAYERSHIPS_HPP
-#define BATTLESHIPS_PLAYERSHIPS_HPP
+#ifndef BATTLESHIPS_PLAYERSHIPSTORE_HPP
+#define BATTLESHIPS_PLAYERSHIPSTORE_HPP
 
 #include "buisness-logic/Ship.hpp"
 #include "dto/PlayerShipPositionsDto.hpp"
@@ -13,11 +13,11 @@ namespace Battleships {
 
     class Ship;
 
-    class PlayerShips {
+    class PlayerShipStore {
     public:
-        PlayerShips(const PlayerShipPositionsDto& ships);
+        PlayerShipStore(const PlayerShipPositionsDto& dto);
 
-        bool areValid() const;
+        bool isValid() const;
     private:
         std::array<Ship,5> _ships;
     };
@@ -25,4 +25,4 @@ namespace Battleships {
 }
 
 
-#endif //BATTLESHIPS_PLAYERSHIPS_HPP
+#endif //BATTLESHIPS_PLAYERSHIPSTORE_HPP
