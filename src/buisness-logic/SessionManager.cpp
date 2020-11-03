@@ -60,10 +60,23 @@ namespace Battleships {
                 PlayerShipStore shipsLayout(dto);
                 if (!shipsLayout.isValid()) return ShipPlacementResponse::REJECTED_INVALID_LAYOUT;
 
-                players[iPlayer].lowerBoard().positionShips(dto);
-                unsigned int iOpponent = iPlayer==0 ? 1 : 0;
+                switch (iPlayer){
+                    case 0 : {
+                        _gameplayController.positionPlayer1Ships(dto);
+                        if (!_gameplayController.isPlayer2Setup())
+                            return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER;
+                        break;
+                    }
+                    case 1 : {
+                        _gameplayController.positionPlayer2Ships(dto);
+                        if (!_gameplayController.isPlayer1Setup())
+                            return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER;
+                        break;
+                    }
+                    default :
+                        return ShipPlacementResponse::UNSPECIFIED_ERROR;
 
-                if (!players[iOpponent].lowerBoard().isSetup()) return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER;
+                }
 
                 _state = GameState::PLAYER_1_TURN;
 
@@ -78,16 +91,8 @@ namespace Battleships {
     SessionManager::GuessResponse SessionManager::playerGuess(const PlayerGuessDto &dto) {
         const std::lock_guard<std::mutex> lock(mainMutex);
 /*
-        enum class GuessResponse {
-            ACCEPTED_HIT,
-            ACCEPTED_HIT_AND_SUNK,
-            ACCEPTED_HIT_AND_SUNK_WIN_CONDITION,
-            ACCEPTED_MISS,
-            REJECTED_INVALID_COORDINATE,
-            REJECTED_UNRECOGNISED_PLAYER,
-            REJECTED_USER_CANNOT_GUESS_NOW,
-        };
-        GuessResponse playerGuess(const PlayerGuessDto& dto);
+
+        GuessResponse guessController.playerGuess(const PlayerGuessDto& dto);
 */
         return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER; // todo
     }

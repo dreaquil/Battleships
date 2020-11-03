@@ -20,12 +20,4 @@ int Battleships::PlayerData::id() const { return _id; }
 
 std::string Battleships::PlayerData::username() const { return _username; }
 
-Battleships::LowerBoard &Battleships::PlayerData::lowerBoard() {return m_lowerBoard;}
-
-const Battleships::LowerBoard &Battleships::PlayerData::lowerBoard() const {return m_lowerBoard;}
-
-Battleships::UpperBoard &Battleships::PlayerData::upperBoard() {return m_upperBoard;}
-
-const Battleships::UpperBoard &Battleships::PlayerData::upperBoard() const {return m_upperBoard;}
-
 

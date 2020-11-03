@@ -13,6 +13,7 @@
 
 #include "buisness-logic/PlayerData.hpp"
 #include "buisness-logic/PlayerShipStore.hpp"
+#include "GameplayController.hpp"
 
 
 
@@ -75,6 +76,7 @@ namespace Battleships {
 
 
     private:
+        GameplayController _gameplayController;
         GameState _state = GameState::WAITING_FOR_PLAYER;
         std::vector<PlayerData> players;
     };

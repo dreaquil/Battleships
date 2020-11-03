@@ -25,18 +25,10 @@ namespace Battleships {
         int id() const;
         std::string username() const;
 
-        LowerBoard& lowerBoard();
-        const LowerBoard& lowerBoard() const;
-
-        UpperBoard& upperBoard();
-        const UpperBoard& upperBoard() const;
-
     private:
         unsigned int _id;
         std::string _username;
         bool isPlayerOne;
-        LowerBoard m_lowerBoard;
-        UpperBoard m_upperBoard;
     };
 
 }
