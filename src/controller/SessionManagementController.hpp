@@ -59,7 +59,7 @@ public:
     }
 
     ENDPOINT_INFO(place_ships) {
-        info->summary = "Join as new player";
+        info->summary = "Specify ship positions for a single player";
 
         info->addConsumes<Object<PlayerShipPositionsDto>>("application/json");
 
