@@ -4,9 +4,9 @@
 
 #include <algorithm>
 #include "Peg.hpp"
-#include "PlayerShipsBoard.hpp"
+#include "LowerBoard.hpp"
 
-Battleships::Peg::PlacementResult Battleships::PlayerShipsBoard::placePeg(Battleships::Peg p) {
+Battleships::Peg::PlacementResult Battleships::LowerBoard::placePeg(Battleships::Peg p) {
 
     if (!p.coordinate.isValid())
         return Peg::PlacementResult::NOT_INSERTED_INVALID_COORDINATE;
@@ -19,4 +19,10 @@ Battleships::Peg::PlacementResult Battleships::PlayerShipsBoard::placePeg(Battle
     return Peg::PlacementResult::INSERTED;
 }
 
-std::vector<Battleships::Peg> Battleships::PlayerShipsBoard::pegs() const { return _pegs; }
+std::vector<Battleships::Peg> Battleships::LowerBoard::pegs() const { return _pegs; }
+
+bool Battleships::LowerBoard::isSetup() const { return shipsStore ? true : false; }
+
+void Battleships::LowerBoard::positionShips(const PlayerShipPositionsDto &dto) {
+    shipsStore = std::make_unique<PlayerShipStore>(dto);
+}

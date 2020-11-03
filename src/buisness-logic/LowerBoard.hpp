@@ -2,8 +2,8 @@
 // Created by david on 03/11/2020.
 //
 
-#ifndef BATTLESHIPS_PLAYERSHIPSBOARD_HPP
-#define BATTLESHIPS_PLAYERSHIPSBOARD_HPP
+#ifndef BATTLESHIPS_LOWERBOARD_HPP
+#define BATTLESHIPS_LOWERBOARD_HPP
 
 #include <vector>
 #include <memory>
@@ -12,15 +12,18 @@
 
 namespace Battleships {
 
-    class PlayerShipsBoard {
+    class LowerBoard {
     public:
         Peg::PlacementResult placePeg(Peg p);
         std::vector<Peg> pegs() const;
+        [[depricated]] bool isSetup() const;
+        void positionShips(const PlayerShipPositionsDto& dto);
     private:
         std::vector<Peg> _pegs; // pegs in this board
+        std::unique_ptr<PlayerShipStore> shipsStore;
     };
 
 }
 
 
-#endif //BATTLESHIPS_PLAYERSHIPSBOARD_HPP
+#endif //BATTLESHIPS_LOWERBOARD_HPP

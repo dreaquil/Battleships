@@ -60,10 +60,10 @@ namespace Battleships {
                 PlayerShipStore shipsLayout(dto);
                 if (!shipsLayout.isValid()) return ShipPlacementResponse::REJECTED_INVALID_LAYOUT;
 
-                players[iPlayer].positionShips(dto);
+                players[iPlayer].lowerBoard().positionShips(dto);
                 unsigned int iOpponent = iPlayer==0 ? 1 : 0;
 
-                if (!players[iOpponent].isSetup()) return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER;
+                if (!players[iOpponent].upperBoard().isSetup()) return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER;
 
                 _state = GameState::PLAYER_1_TURN;
 
