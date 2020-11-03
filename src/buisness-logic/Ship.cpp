@@ -2,6 +2,7 @@
 // Created by david on 01/11/2020.
 //
 
+#include <algorithm>
 #include <unordered_map>
 #include "Ship.hpp"
 #include "dto/ShipPositionDto.hpp"
@@ -135,6 +136,11 @@ namespace Battleships
         CoordinateLine otherFootprint(other.topLeftCoordinate(), other.bottomRightCoordinate());
 
         if (thisFootprint.overlaps(otherFootprint)) return false;
+    }
+
+    bool Ship::isOccupying(Coordinate pos) const {
+        CoordinateLine thisFootprint(this->topLeftCoordinate(), this->bottomRightCoordinate());
+        return std::any_of(thisFootprint.begin(),thisFootprint.end(),[&pos](const Coordinate& e){ return pos==e;});
     }
 
 

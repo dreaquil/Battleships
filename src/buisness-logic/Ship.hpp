@@ -44,6 +44,7 @@ namespace Battleships {
         bool hasValidType() const;
         bool hasValidOrientation() const;
         bool isOverLapping(const Ship& other) const;
+        bool isOccupying(Coordinate pos) const;
 
     private:
 

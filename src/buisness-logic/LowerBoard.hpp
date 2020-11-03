@@ -16,7 +16,7 @@ namespace Battleships {
     public:
         Peg::PlacementResult placePeg(Peg p);
         std::vector<Peg> pegs() const;
-        [[depricated]] bool isSetup() const;
+        bool isSetup() const;
         void positionShips(const PlayerShipPositionsDto& dto);
     private:
         std::vector<Peg> _pegs; // pegs in this board
