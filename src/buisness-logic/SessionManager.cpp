@@ -14,6 +14,23 @@
 namespace
 {
     std::mutex mainMutex;
+
+
+    Battleships::SessionManager::GuessResponse translateGuessResponse(Battleships::GameplayController::GuessResponse gameRsp) {
+        using namespace Battleships;
+        switch (gameRsp) {
+            case GameplayController::GuessResponse::ACCEPTED_HIT_AND_SUNK :
+                return SessionManager::GuessResponse::ACCEPTED_HIT_AND_SUNK;
+            case GameplayController::GuessResponse::ACCEPTED_HIT :
+                return SessionManager::GuessResponse::ACCEPTED_HIT;
+            case GameplayController::GuessResponse::ACCEPTED_HIT_AND_SUNK_WIN_CONDITION :
+                return SessionManager::GuessResponse::ACCEPTED_HIT_AND_SUNK_WIN_CONDITION;
+            case GameplayController::GuessResponse::ACCEPTED_MISS :
+                return SessionManager::GuessResponse::ACCEPTED_MISS;
+            case GameplayController::GuessResponse::REJECTED_INVALID_COORDINATE :
+                return SessionManager::GuessResponse::REJECTED_INVALID_COORDINATE;
+        }
+    }
 }
 
 namespace Battleships {
@@ -88,13 +105,50 @@ namespace Battleships {
         }
     }
 
+
     SessionManager::GuessResponse SessionManager::playerGuess(const PlayerGuessDto &dto) {
         const std::lock_guard<std::mutex> lock(mainMutex);
-/*
 
-        GuessResponse guessController.playerGuess(const PlayerGuessDto& dto);
-*/
-        return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER; // todo
+        int id = dto.id;
+        if (id<0 || id<2 || id>=players.size()) return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER;
+        if (id==0 && _state != GameState::PLAYER_1_TURN)  return SessionManager::GuessResponse::REJECTED_USER_CANNOT_GUESS_NOW;
+        if (id==1 && _state != GameState::PLAYER_2_TURN)  return SessionManager::GuessResponse::REJECTED_USER_CANNOT_GUESS_NOW;
+
+        // figure out annoying cast...
+        int iRow = dto.iRow;
+        int iCol = dto.iColumn;
+        Row row = Row(iRow);
+        Column column = Column(iCol);
+
+        Coordinate coord(Row(iRow),column);
+        GameplayController::GuessResponse gameResponse = (id == 0) && (id != 1) ?
+                                                         _gameplayController.handlePlayer1Guess(coord) :
+                                                         _gameplayController.handlePlayer2Guess(coord);
+
+        switch (gameResponse) {
+            case GameplayController::GuessResponse::ACCEPTED_HIT :
+            case GameplayController::GuessResponse::ACCEPTED_HIT_AND_SUNK :
+            case GameplayController::GuessResponse::ACCEPTED_MISS :
+            {
+                if (_state == GameState::PLAYER_1_TURN) _state = GameState::PLAYER_2_TURN;
+                if (_state == GameState::PLAYER_2_TURN) _state = GameState::PLAYER_1_TURN;
+                break;  // change turns...
+            }
+            case GameplayController::GuessResponse::ACCEPTED_HIT_AND_SUNK_WIN_CONDITION :
+            {
+                _state = GameState::WAITING_FOR_PLAYER;
+                break; // restart again...
+            }
+            case GameplayController::GuessResponse::REJECTED_INVALID_COORDINATE :
+            case GameplayController::GuessResponse::REJECTED_UNRECOGNISED_PLAYER :
+            case GameplayController::GuessResponse::REJECTED_USER_CANNOT_GUESS_NOW :
+            {
+                break; // error | same player gets a go...
+            }
+
+        }
+
+        return translateGuessResponse(gameResponse);
     }
 
     SessionManager::RestartResponse SessionManager::restartGame(const GameRestartDto &dto) {

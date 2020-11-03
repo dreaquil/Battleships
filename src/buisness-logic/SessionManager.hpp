@@ -62,8 +62,8 @@ namespace Battleships {
         enum class GameState : int {
             WAITING_FOR_PLAYER = 1,
             PLACING_SHIPS = 2,
-            PLAYER_1_TURN = 3,
-            PLAYER_2_TURN = 4,
+            PLAYER_1_TURN = 3, // Todo:
+            PLAYER_2_TURN = 4, //  Combine here and track turns in the game state manager
             TERMINATED = 5,
         };
         SessionManager::GameState gameState() const;

@@ -14,7 +14,10 @@ namespace Battleships {
 
     class LowerBoard {
     public:
+        bool hasShipAt(Coordinate coord);
+
         Peg::PlacementResult placePeg(Peg p);
+
         std::vector<Peg> pegs() const;
         bool isSetup() const;
         void positionShips(const PlayerShipPositionsDto& dto);

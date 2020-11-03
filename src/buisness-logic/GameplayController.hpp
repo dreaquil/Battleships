@@ -17,30 +17,30 @@
 
 namespace Battleships {
 
-    enum class GuessResponse {
-        ACCEPTED_HIT,
-        ACCEPTED_HIT_AND_SUNK,
-        ACCEPTED_HIT_AND_SUNK_WIN_CONDITION,
-        ACCEPTED_MISS,
-        REJECTED_INVALID_COORDINATE,
-        REJECTED_UNRECOGNISED_PLAYER,
-        REJECTED_USER_CANNOT_GUESS_NOW,
-    };
-
     class GameplayController {
     public:
 
-        GuessResponse placePin(const Coordinate& pos);
+        enum class GuessResponse {
+            ACCEPTED_HIT,
+            ACCEPTED_HIT_AND_SUNK,
+            ACCEPTED_HIT_AND_SUNK_WIN_CONDITION,
+            ACCEPTED_MISS,
+            REJECTED_INVALID_COORDINATE,
+            REJECTED_UNRECOGNISED_PLAYER,
+            REJECTED_USER_CANNOT_GUESS_NOW,
+        };
 
         bool isPlayer1Setup() const;
         void positionPlayer1Ships(const PlayerShipPositionsDto& dto);
         std::vector<Peg> player1UpperBoardPegs() const;
         std::vector<Peg> player1LowerBoardPegs() const;
+        GameplayController::GuessResponse handlePlayer1Guess(const Coordinate& pos);
 
         bool isPlayer2Setup() const;
         void positionPlayer2Ships(const PlayerShipPositionsDto& dto);
         std::vector<Peg> player2UpperBoardPegs() const;
         std::vector<Peg> player2LowerBoardPegs() const;
+        GameplayController::GuessResponse handlePlayer2Guess(const Coordinate& pos);
 
     private:
         LowerBoard m_p1LowerBoard;

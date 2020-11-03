@@ -54,3 +54,24 @@ bool Battleships::PlayerShipStore::isValid() const {
 
     return true;
 }
+
+Battleships::PlayerShipStore::const_iterator Battleships::PlayerShipStore::begin() const {
+    return _ships.begin();
+}
+
+Battleships::PlayerShipStore::const_iterator Battleships::PlayerShipStore::end() const {
+    return _ships.end();
+}
+
+Battleships::Ship *Battleships::PlayerShipStore::getShipAt(const Battleships::Coordinate &pos) {
+
+    for (auto& ship : _ships)
+    {
+        if(ship.isOccupying(pos)) return &ship;
+    }
+    return nullptr;
+}
+
+bool Battleships::PlayerShipStore::allSunk() const {
+    return std::all_of(_ships.begin(),_ships.end(),[](const Ship& s){return s.isSunk();});
+}
