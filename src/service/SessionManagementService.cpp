@@ -1,10 +1,10 @@
 
-#include "GameManagementService.hpp"
+#include "SessionManagementService.hpp"
 
 #define UNWRAP(X) (*X.get())
 #define TO_STR(X) (X->std_str())
 
-oatpp::Object<SessionSummaryDto> GameManagementService::sessionSummary() {
+oatpp::Object<SessionSummaryDto> SessionManagementService::sessionSummary() {
 
     int nPlayer = m_sessionManager.nPlayers();
     bool player1Joined = nPlayer > 0;
@@ -26,7 +26,7 @@ oatpp::Object<SessionSummaryDto> GameManagementService::sessionSummary() {
     return ExternalResponse;
 }
 
-oatpp::Object<AddPlayerDto> GameManagementService::addPlayer(const oatpp::Object<AddPlayerDto>& dto) {
+oatpp::Object<AddPlayerDto> SessionManagementService::addPlayer(const oatpp::Object<AddPlayerDto>& dto) {
 
     using InternalResponse = Battleships::SessionManager::AddPlayerResponse;
 
@@ -49,7 +49,7 @@ oatpp::Object<AddPlayerDto> GameManagementService::addPlayer(const oatpp::Object
     return ExternalResponse;
 }
 
-oatpp::Object<StatusDto> GameManagementService::placeShips(const oatpp::Object<PlayerShipPositionsDto> &dto) {
+oatpp::Object<StatusDto> SessionManagementService::placeShips(const oatpp::Object<PlayerShipPositionsDto> &dto) {
 
     using InternalResponse = Battleships::SessionManager::ShipPlacementResponse;
 
@@ -68,7 +68,7 @@ oatpp::Object<StatusDto> GameManagementService::placeShips(const oatpp::Object<P
 }
 
 
-oatpp::Object<PlayerGuessDto> GameManagementService::playerGuess(const oatpp::Object<PlayerGuessDto> &dto) {
+oatpp::Object<PlayerGuessDto> SessionManagementService::playerGuess(const oatpp::Object<PlayerGuessDto> &dto) {
 
     using InternalResponse = Battleships::SessionManager::GuessResponse;
 
@@ -111,7 +111,7 @@ oatpp::Object<PlayerGuessDto> GameManagementService::playerGuess(const oatpp::Ob
 }
 
 
-oatpp::Object<StatusDto> GameManagementService::restartGame(const oatpp::Object<GameRestartDto> &dto) {
+oatpp::Object<StatusDto> SessionManagementService::restartGame(const oatpp::Object<GameRestartDto> &dto) {
 
     using InternalResponse = Battleships::SessionManager::RestartResponse;
 
@@ -143,7 +143,7 @@ oatpp::Object<StatusDto> GameManagementService::restartGame(const oatpp::Object<
 
 
 
-oatpp::Object<AddPlayerDto> GameManagementService::getPlayerById(const oatpp::Int32& id, const std::shared_ptr<oatpp::orm::Connection>& connection) {
+oatpp::Object<AddPlayerDto> SessionManagementService::getPlayerById(const oatpp::Int32& id, const std::shared_ptr<oatpp::orm::Connection>& connection) {
 
     auto dbResult = m_database->getPlayerById(id, connection);
     OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
@@ -162,7 +162,7 @@ oatpp::Object<AddPlayerDto> GameManagementService::getPlayerById(const oatpp::In
 
 
 
-oatpp::Object<GameDto> GameManagementService::createGame(const oatpp::Object<GameDto>& dto) {
+oatpp::Object<GameDto> SessionManagementService::createGame(const oatpp::Object<GameDto>& dto) {
 
   auto dbResult = m_database->createGame(dto);
   OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
@@ -175,7 +175,7 @@ oatpp::Object<GameDto> GameManagementService::createGame(const oatpp::Object<Gam
 
 }
 
-oatpp::Object<GameDto> GameManagementService::getGameById(const oatpp::Int32& id, const std::shared_ptr<oatpp::orm::Connection>& connection) {
+oatpp::Object<GameDto> SessionManagementService::getGameById(const oatpp::Int32& id, const std::shared_ptr<oatpp::orm::Connection>& connection) {
 
     auto dbResult = m_database->getGameById(id, connection);
     OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());

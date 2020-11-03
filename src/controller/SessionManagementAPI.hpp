@@ -2,10 +2,10 @@
 // Created by david on 31/10/2020.
 //
 
-#ifndef BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
-#define BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
+#ifndef BATTLESHIPS_SESSIONMANAGEMENTAPI_HPP
+#define BATTLESHIPS_SESSIONMANAGEMENTAPI_HPP
 
-#include "service/GameManagementService.hpp"
+#include "service/SessionManagementService.hpp"
 
 #include "oatpp/web/server/api/ApiController.hpp"
 #include "oatpp/parser/json/mapping/ObjectMapper.hpp"
@@ -17,20 +17,20 @@
 /**
  * SessionManager Management REST controller.
  */
-class SessionManagementController : public oatpp::web::server::api::ApiController {
+class SessionManagementAPI : public oatpp::web::server::api::ApiController {
 public:
-    SessionManagementController(const std::shared_ptr<ObjectMapper>& objectMapper)
+    SessionManagementAPI(const std::shared_ptr<ObjectMapper>& objectMapper)
             : oatpp::web::server::api::ApiController(objectMapper)
     {}
 private:
 
-    GameManagementService m_gameManagementService; // Create game service.
+    SessionManagementService m_gameManagementService; // Create game service.
 public:
 
-    static std::shared_ptr<SessionManagementController> createShared(
+    static std::shared_ptr<SessionManagementAPI> createShared(
             OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper) // Inject objectMapper component here as default parameter
     ){
-        return std::make_shared<SessionManagementController>(objectMapper);
+        return std::make_shared<SessionManagementAPI>(objectMapper);
     }
 
     ENDPOINT_INFO(session_summary) {
@@ -131,4 +131,4 @@ public:
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- End Codegen
 
 
-#endif //BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
+#endif //BATTLESHIPS_SESSIONMANAGEMENTAPI_HPP

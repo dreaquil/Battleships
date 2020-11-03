@@ -13,14 +13,14 @@ add_library(battleships-lib
         src/dto/UserDto.hpp
         src/service/UserService.cpp
         src/service/UserService.hpp
-        src/service/GameManagementService.cpp
-        src/service/GameManagementService.hpp
+        src/service/SessionManagementService.cpp
+        src/service/SessionManagementService.hpp
         src/AppComponent.hpp
         src/DatabaseComponent.hpp
         src/SwaggerComponent.hpp
         src/ErrorHandler.cpp
         src/ErrorHandler.hpp
-        src/controller/SessionManagementController.hpp
+        src/controller/SessionManagementAPI.hpp
         src/dto/AddPlayerDto.hpp
         src/buisness-logic/Coordinate.hpp
         src/dto/ShipPositionDto.hpp

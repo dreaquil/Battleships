@@ -13,7 +13,7 @@
 #include "oatpp/core/macro/component.hpp"
 #include "buisness-logic/SessionManager.hpp"
 
-class GameManagementService {
+class SessionManagementService {
 public:
 
     oatpp::Object<SessionSummaryDto> sessionSummary();

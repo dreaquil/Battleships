@@ -118,7 +118,7 @@ namespace Battleships {
         players.clear();
         _state = GameState::WAITING_FOR_PLAYER;
 
-        return SessionManager::RestartResponse::ACCEPTED_RESTART_SESSION :
+        return SessionManager::RestartResponse::ACCEPTED_RESTART_SESSION;
     }
 
 }
