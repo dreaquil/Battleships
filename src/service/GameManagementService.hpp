@@ -17,6 +17,7 @@ public:
     oatpp::Object<SessionSummaryDto> sessionSummary();
 
     oatpp::Object<AddPlayerDto> addPlayer(const oatpp::Object<AddPlayerDto>& dto);
+    oatpp::Object<StatusDto> placeShips(const oatpp::Object<PlayerShipPositionsDto>& dto);
 
 
   oatpp::Object<GameDto> createGame(const oatpp::Object<GameDto>& dto);

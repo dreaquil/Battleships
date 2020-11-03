@@ -38,7 +38,7 @@ namespace Battleships {
             REJECTED_CANNOT_PLACE_SHIPS_NOW,
             UNSPECIFIED_ERROR,
         };
-        ShipPlacementResponse placeShips(unsigned int iPlayer, const PlayerShipPositionsDto &dto);
+        ShipPlacementResponse placeShips(const PlayerShipPositionsDto &dto);
 
         enum class GuessResponse {
             ACCEPTED_HIT,

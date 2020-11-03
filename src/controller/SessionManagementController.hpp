@@ -47,9 +47,10 @@ public:
     ENDPOINT_INFO(join_session) {
         info->summary = "Join as new player";
 
-        info->addConsumes < Object < AddPlayerDto >> ("application/json");
+        info->addConsumes<Object<AddPlayerDto>> ("application/json");
 
-        info->addResponse < Object < AddPlayerDto >> (Status::CODE_200, "application/json");
+        info->addResponse<Object<AddPlayerDto>>(Status::CODE_200, "application/json");
+        info->addResponse<Object<StatusDto>>(Status::CODE_417, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
     }
     ENDPOINT("POST", "join_session", join_session, BODY_DTO(Object<AddPlayerDto>, playerDto))
@@ -57,9 +58,19 @@ public:
         return createDtoResponse(Status::CODE_200, m_gameManagementService.addPlayer(playerDto));
     }
 
+    ENDPOINT_INFO(place_ships) {
+        info->summary = "Join as new player";
 
+        info->addConsumes<Object<PlayerShipPositionsDto>>("application/json");
 
-
+        info->addResponse<Object<StatusDto>>(Status::CODE_200, "application/json");
+        info->addResponse<Object<StatusDto>>(Status::CODE_417, "application/json");
+        info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
+    }
+    ENDPOINT("POST", "place_ships", place_ships, BODY_DTO(Object<PlayerShipPositionsDto>, dto))
+    {
+        return createDtoResponse(Status::CODE_200, m_gameManagementService.placeShips(dto));
+    }
 
 
 

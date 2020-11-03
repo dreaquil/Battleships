@@ -49,6 +49,25 @@ oatpp::Object<AddPlayerDto> GameManagementService::addPlayer(const oatpp::Object
     return ExternalResponse;
 }
 
+oatpp::Object<StatusDto> GameManagementService::placeShips(const oatpp::Object<PlayerShipPositionsDto> &dto) {
+
+    using InternalResponse = Battleships::SessionManager::ShipPlacementResponse;
+
+    auto ir = m_sessionManager.placeShips(UNWRAP(dto));
+
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::REJECTED_INVALID_LAYOUT, Status::CODE_417, "Specified ship positions are illegal");
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::REJECTED_CANNOT_PLACE_SHIPS_NOW, Status::CODE_417, "Cannot accept ship positions at this time");
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::UNSPECIFIED_ERROR, Status::CODE_500, "Unspecified Error");
+
+    auto ExternalResponse = oatpp::Object<StatusDto>::createShared();
+    ExternalResponse->status = "OK";
+    ExternalResponse->code = 200;
+    ExternalResponse->message = "Ships have been placed successfully";
+
+    return ExternalResponse;
+}
+
+
 
 
 
@@ -96,4 +115,3 @@ oatpp::Object<GameDto> GameManagementService::getGameById(const oatpp::Int32& id
     return result[0];
 
 }
-

@@ -40,7 +40,9 @@ namespace Battleships {
     }
 
 
-    SessionManager::ShipPlacementResponse SessionManager::placeShips(unsigned int iPlayer, const PlayerShipPositionsDto &dto) {
+    SessionManager::ShipPlacementResponse SessionManager::placeShips(const PlayerShipPositionsDto &dto) {
+
+        int iPlayer = dto.id;
 
         switch (_state){
             case GameState::PLACING_SHIPS : {
@@ -56,7 +58,6 @@ namespace Battleships {
                 if (!players[iOpponent].isSetup()) return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER;
 
                 _state = GameState::PLAYER_1_TURN;
-
 
                 return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_GAME_STARTING;
             }

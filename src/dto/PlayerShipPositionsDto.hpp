@@ -14,6 +14,8 @@ class PlayerShipPositionsDto : public oatpp::DTO {
 
     DTO_INIT(PlayerShipPositionsDto, DTO)
 
+    DTO_FIELD(Int32, id); // 0 - player 1, 1 - player 2
+
     DTO_FIELD(Int8, aircraftCarrier_topLeftRow); // A...J
     DTO_FIELD(Int8, aircraftCarrier_topLeftColumn); // 0...9
     DTO_FIELD(Int8, aircraftCarrier_orientation); // 'H' - horizontal, 'V' - Vertical
