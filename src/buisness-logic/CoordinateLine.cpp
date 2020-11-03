@@ -35,3 +35,7 @@ Battleships::CoordinateLine::CoordinateLine(Battleships::Coordinate front, Battl
 }
 
 bool Battleships::CoordinateLine::isValid() const { return _data.empty(); }
+
+Battleships::CoordinateLine::const_iterator Battleships::CoordinateLine::begin() const { return _data.begin(); }
+
+Battleships::CoordinateLine::const_iterator Battleships::CoordinateLine::end() const { return _data.end(); }

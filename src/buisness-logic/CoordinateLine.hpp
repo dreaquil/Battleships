@@ -6,6 +6,7 @@
 #define BATTLESHIPS_COORDINATELINE_HPP
 
 #include <vector>
+#include <iterator>
 #include "buisness-logic/Coordinate.hpp"
 
 namespace Battleships {
@@ -14,9 +15,8 @@ namespace Battleships {
     public:
         CoordinateLine(Coordinate front, Coordinate back);
         bool isValid() const;
-        bool isEmpty() const;
 
-        using const_iterator = const Coordinate*;
+        using const_iterator = const std::vector<Coordinate>::const_iterator;
         const_iterator begin() const;
         const_iterator end() const;
 
