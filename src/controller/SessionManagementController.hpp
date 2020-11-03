@@ -33,20 +33,18 @@ public:
         return std::make_shared<SessionManagementController>(objectMapper);
     }
 
-    ENDPOINT_INFO(sessionSummary) {
+    ENDPOINT_INFO(session_summary) {
         info->summary = "get game summary data";
 
         info->addResponse<oatpp::Object<PlayersPageDto>>(Status::CODE_200, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
     }
-    ENDPOINT("GET", "players", sessionSummary)
+    ENDPOINT("GET", "session_summary", session_summary)
     {
         return createDtoResponse(Status::CODE_200, m_gameManagementService.sessionSummary());
     }
 
-
-
-    ENDPOINT_INFO(createPlayer) {
+    ENDPOINT_INFO(join_session) {
         info->summary = "Join as new player";
 
         info->addConsumes < Object < AddPlayerDto >> ("application/json");
@@ -54,7 +52,7 @@ public:
         info->addResponse < Object < AddPlayerDto >> (Status::CODE_200, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
     }
-    ENDPOINT("POST", "player", createPlayer, BODY_DTO(Object<AddPlayerDto>, playerDto))
+    ENDPOINT("POST", "join_session", join_session, BODY_DTO(Object<AddPlayerDto>, playerDto))
     {
         return createDtoResponse(Status::CODE_200, m_gameManagementService.addPlayer(playerDto));
     }

@@ -10,7 +10,7 @@ oatpp::Object<SessionSummaryDto> GameManagementService::sessionSummary() {
     bool player1Joined = nPlayer > 0;
     bool player2Joined = nPlayer > 1;
 
-    oatpp::Object<SessionSummaryDto> ExternalResponse;
+    auto ExternalResponse = oatpp::Object<SessionSummaryDto>::createShared();
 
     ExternalResponse->player1Joined = player1Joined;
     ExternalResponse->idPlayer1 = player1Joined ? 0 : -1;
@@ -32,16 +32,17 @@ oatpp::Object<AddPlayerDto> GameManagementService::addPlayer(const oatpp::Object
 
     auto ir = m_sessionManager.addPlayer(UNWRAP(dto));
 
-    OATPP_ASSERT_HTTP(ir==InternalResponse::REJECTED_USER_ALREADY_REGISTERED, Status::CODE_417, "Session is already in progress");
-    OATPP_ASSERT_HTTP(ir==InternalResponse::REJECTED_SESSION_IN_PROGRESS, Status::CODE_417, "Session is already in progress");
-    OATPP_ASSERT_HTTP(ir==InternalResponse::UNSPECIFIED_ERROR, Status::CODE_500, "Unspecified Error");
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::REJECTED_USER_ALREADY_REGISTERED, Status::CODE_417, "Session is already in progress");
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::REJECTED_SESSION_IN_PROGRESS, Status::CODE_417, "Session is already in progress");
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::UNSPECIFIED_ERROR, Status::CODE_500, "Unspecified Error");
 
     std::string playerName = TO_STR(dto->userName);
     bool hasPlayer = m_sessionManager.hasPlayer(playerName);
     int playerId = m_sessionManager.getPlayerId(playerName);
     playerName = hasPlayer ? playerName : "<not-found>";
 
-    oatpp::Object<AddPlayerDto> ExternalResponse;
+    auto ExternalResponse = oatpp::Object<AddPlayerDto>::createShared();
+    //AddPlayerDto ExternalResponse;
     ExternalResponse->id = playerId;
     ExternalResponse->userName = playerName.c_str();
 

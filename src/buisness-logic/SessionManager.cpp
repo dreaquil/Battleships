@@ -103,7 +103,7 @@ namespace Battleships {
     }
 
     std::string SessionManager::getPlayerName(int id) const {
-        return id>0 && id<2 ? players[id].username() : std::string("<not-found>");
+        return id>=0 && id<2 && id<players.size() ? players[id].username() : std::string("<not-found>");
     }
 
 }
