@@ -63,7 +63,7 @@ namespace Battleships {
                 players[iPlayer].lowerBoard().positionShips(dto);
                 unsigned int iOpponent = iPlayer==0 ? 1 : 0;
 
-                if (!players[iOpponent].upperBoard().isSetup()) return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER;
+                if (!players[iOpponent].lowerBoard().isSetup()) return ShipPlacementResponse::ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER;
 
                 _state = GameState::PLAYER_1_TURN;
 
