@@ -3,6 +3,7 @@
 //
 
 #include <vector>
+#include <mutex>
 #include <algorithm>
 #include "SessionManager.hpp"
 #include "buisness-logic/PlayerData.hpp"
@@ -10,10 +11,16 @@
 #include "dto/AddPlayerDto.hpp"
 #include "dto/PlayerShipPositionsDto.hpp"
 
+namespace
+{
+    std::mutex mainMutex;
+}
+
 namespace Battleships {
 
 
     SessionManager::AddPlayerResponse SessionManager::addPlayer(const AddPlayerDto &dto) {
+        const std::lock_guard<std::mutex> lock(mainMutex);
 
         switch (_state) {
             case GameState::WAITING_FOR_PLAYER : {
@@ -41,6 +48,7 @@ namespace Battleships {
 
 
     SessionManager::ShipPlacementResponse SessionManager::placeShips(const PlayerShipPositionsDto &dto) {
+        const std::lock_guard<std::mutex> lock(mainMutex);
 
         int iPlayer = dto.id;
 
@@ -65,6 +73,23 @@ namespace Battleships {
                 return ShipPlacementResponse::REJECTED_CANNOT_PLACE_SHIPS_NOW;
             };
         }
+    }
+
+    SessionManager::GuessResponse SessionManager::playerGuess(const PlayerGuessDto &dto) {
+        const std::lock_guard<std::mutex> lock(mainMutex);
+        return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER; // todo
+    }
+
+    SessionManager::RestartResponse SessionManager::restartGame(const GameRestartDto &dto) {
+        const std::lock_guard<std::mutex> lock(mainMutex);
+
+        int id = dto.id;
+        if (id<0 || id<2 || id>=players.size()) return SessionManager::RestartResponse::REJECTED_UNRECOGNISED_PLAYER;
+
+        players.clear();
+        _state = GameState::WAITING_FOR_PLAYER;
+
+        return SessionManager::RestartResponse::ACCEPTED_RESTART_SESSION;
     }
 
     SessionManager::GameState SessionManager::gameState() const {
@@ -105,20 +130,6 @@ namespace Battleships {
 
     std::string SessionManager::getPlayerName(int id) const {
         return id>=0 && id<2 && id<players.size() ? players[id].username() : std::string("<not-found>");
-    }
-
-    SessionManager::GuessResponse SessionManager::playerGuess(const PlayerGuessDto &dto) {
-        return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER; // todo
-    }
-
-    SessionManager::RestartResponse SessionManager::restartGame(const GameRestartDto &dto) {
-        int id = dto.id;
-        if (id<0 || id<2 || id>=players.size()) return SessionManager::RestartResponse::REJECTED_UNRECOGNISED_PLAYER;
-
-        players.clear();
-        _state = GameState::WAITING_FOR_PLAYER;
-
-        return SessionManager::RestartResponse::ACCEPTED_RESTART_SESSION;
     }
 
 }

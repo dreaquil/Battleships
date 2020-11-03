@@ -6,7 +6,6 @@
 #define BATTLESHIPS_SESSIONMANAGER_HPP
 
 #include <memory>
-
 #include "dto/AddPlayerDto.hpp"
 #include "dto/PlayerShipPositionsDto.hpp"
 #include "dto/PlayerGuessDto.hpp"
