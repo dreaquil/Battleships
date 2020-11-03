@@ -14,6 +14,7 @@ namespace Battleships {
 
     class OpponentBoard {
     public:
+        std::vector<Peg> pegs() const;
     private:
         const PlayerShipsBoard& playerBoardForOpponent;
     };

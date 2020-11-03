@@ -14,8 +14,10 @@ namespace Battleships {
 
     class PlayerShipsBoard {
     public:
+        Peg::PlacementResult placePeg(Peg p);
+        std::vector<Peg> pegs() const;
     private:
-        std::vector<Peg> pegs; // pegs in this board
+        std::vector<Peg> _pegs; // pegs in this board
     };
 
 }

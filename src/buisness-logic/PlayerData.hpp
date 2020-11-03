@@ -12,6 +12,7 @@
 #include "dto/PlayerShipPositionsDto.hpp"
 #include "PlayerShipsBoard.hpp"
 #include "dto/AddPlayerDto.hpp"
+#include "OpponentBoard.hpp"
 
 namespace Battleships {
 
@@ -31,6 +32,8 @@ namespace Battleships {
         std::string _username;
         bool isPlayerOne;
         std::unique_ptr<PlayerShipStore> shipsStore;
+        PlayerShipsBoard ownBoard;
+        OpponentBoard *opponentBoard;
     };
 
 }
