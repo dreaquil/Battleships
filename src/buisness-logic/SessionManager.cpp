@@ -3,25 +3,29 @@
 //
 
 #include <vector>
+#include <algorithm>
 #include "SessionManager.hpp"
 #include "buisness-logic/PlayerData.hpp"
+
+#include "dto/AddPlayerDto.hpp"
+#include "dto/PlayerShipPositionsDto.hpp"
 
 namespace Battleships {
 
 
-    SessionManager::AddPlayerResponse SessionManager::addPlayer(const std::string &p) {
+    SessionManager::AddPlayerResponse SessionManager::addPlayer(const AddPlayerDto &dto) {
 
         switch (_state) {
             case GameState::WAITING_FOR_PLAYER : {
 
                 switch (nPlayers()) {
                     case 0 : {
-                        players.emplace_back(p);
+                        players.emplace_back(dto);
                         return AddPlayerResponse::ACCEPTED_JOINED_SESSION_AS_PLAYER_1;
                     }
                     case 1 : {
                         _state = GameState::PLACING_SHIPS;
-                        players.emplace_back(p);
+                        players.emplace_back(dto);
                         return AddPlayerResponse::ACCEPTED_JOINED_SESSION_AS_PLAYER_2;
                     }
                     default : {
@@ -36,7 +40,7 @@ namespace Battleships {
     }
 
 
-    SessionManager::ShipPlacementResponse SessionManager::placeShips(unsigned int iPlayer, PlayerShipPositionsDto &dto) {
+    SessionManager::ShipPlacementResponse SessionManager::placeShips(unsigned int iPlayer, const PlayerShipPositionsDto &dto) {
 
         switch (_state){
             case GameState::PLACING_SHIPS : {
@@ -62,9 +66,18 @@ namespace Battleships {
         }
     }
 
+    bool SessionManager::hasPlayer(const std::string &username) const {
+        const auto& it = std::find_if(players.begin(), players.end(), [&username](const PlayerData &p){ return p.username() == username;});
+        return it!=players.end();
+    }
 
     unsigned int SessionManager::nPlayers() const {
         return players.size();
+    }
+
+    int SessionManager::getPlayerId(const std::string &username) const {
+        const auto& it = std::find_if(players.begin(), players.end(), [&username](const PlayerData &p){ return p.username() == username;});
+        return it!=players.end() ? it->id() : -1;
     }
 
 }

@@ -15,7 +15,7 @@ namespace Battleships {
 
     class PlayerShipStore {
     public:
-        PlayerShipStore(const PlayerShipPositionsDto& ships);
+        PlayerShipStore(const PlayerShipPositionsDto& dto);
 
         bool isValid() const;
     private:

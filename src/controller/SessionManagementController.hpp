@@ -5,8 +5,6 @@
 #ifndef BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
 #define BATTLESHIPS_SESSIONMANAGEMENTCONTROLLER_HPP
 
-#include "buisness-logic/SessionManager.hpp"
-
 #include "service/GameManagementService.hpp"
 
 #include "oatpp/web/server/api/ApiController.hpp"
@@ -26,8 +24,7 @@ public:
     {}
 private:
 
-    Battleships::SessionManager m_sessionManager;
-    [[ depricated ]] GameManagementService m_gameManagementService; // Create game service.
+    GameManagementService m_gameManagementService; // Create game service.
 public:
 
     static std::shared_ptr<SessionManagementController> createShared(
@@ -36,31 +33,32 @@ public:
         return std::make_shared<SessionManagementController>(objectMapper);
     }
 
-
-    ENDPOINT_INFO(createPlayer) {
-        info->summary = "Create new PlayerData";
-
-        info->addConsumes<Object<PlayerDto>>("application/json");
-
-        info->addResponse<Object<PlayerDto>>(Status::CODE_200, "application/json");
-        info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
-    }
-    ENDPOINT("POST", "player", createPlayer,
-             BODY_DTO(Object<PlayerDto>, playerDto))
-    {
-        return createDtoResponse(Status::CODE_200, m_gameManagementService.addPlayer(playerDto));
-    }
-
-    ENDPOINT_INFO(getPlayers) {
-        info->summary = "get all stored players";
+    ENDPOINT_INFO(sessionSummary) {
+        info->summary = "get game summary data";
 
         info->addResponse<oatpp::Object<PlayersPageDto>>(Status::CODE_200, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
     }
-    ENDPOINT("GET", "players", getPlayers)
+    ENDPOINT("GET", "players", sessionSummary)
     {
-        return createDtoResponse(Status::CODE_200, m_gameManagementService.getPlayers());
+        return createDtoResponse(Status::CODE_200, m_gameManagementService.sessionSummary());
     }
+
+
+
+    ENDPOINT_INFO(createPlayer) {
+        info->summary = "Join as new player";
+
+        info->addConsumes < Object < AddPlayerDto >> ("application/json");
+
+        info->addResponse < Object < AddPlayerDto >> (Status::CODE_200, "application/json");
+        info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
+    }
+    ENDPOINT("POST", "player", createPlayer, BODY_DTO(Object<AddPlayerDto>, playerDto))
+    {
+        return createDtoResponse(Status::CODE_200, m_gameManagementService.addPlayer(playerDto));
+    }
+
 
 
 

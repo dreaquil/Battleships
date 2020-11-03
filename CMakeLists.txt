@@ -21,7 +21,7 @@ add_library(battleships-lib
         src/ErrorHandler.cpp
         src/ErrorHandler.hpp
         src/controller/SessionManagementController.hpp
-        src/dto/PlayerDto.hpp
+        src/dto/AddPlayerDto.hpp
         src/buisness-logic/Coordinate.hpp
         src/dto/ShipPositionDto.hpp
         src/buisness-logic/Row.hpp
@@ -30,7 +30,7 @@ add_library(battleships-lib
         src/buisness-logic/Ship.cpp
         src/buisness-logic/Ship.hpp
         src/dto/PlayerShipPositionsDto.hpp
-        src/buisness-logic/PlayerShipStore.cpp src/buisness-logic/PlayerShipStore.hpp src/buisness-logic/PlayerData.cpp src/buisness-logic/PlayerData.hpp src/buisness-logic/SessionManager.cpp src/buisness-logic/SessionManager.hpp)
+        src/buisness-logic/PlayerShipStore.cpp src/buisness-logic/PlayerShipStore.hpp src/buisness-logic/PlayerData.cpp src/buisness-logic/PlayerData.hpp src/buisness-logic/SessionManager.cpp src/buisness-logic/SessionManager.hpp src/dto/SessionSummaryDto.hpp)
 
 ## include directories
 

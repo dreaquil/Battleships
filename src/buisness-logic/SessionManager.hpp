@@ -7,6 +7,9 @@
 
 #include <memory>
 
+#include "dto/AddPlayerDto.hpp"
+#include "dto/PlayerShipPositionsDto.hpp"
+
 #include "buisness-logic/PlayerData.hpp"
 #include "buisness-logic/PlayerShipStore.hpp"
 
@@ -25,7 +28,7 @@ namespace Battleships {
             REJECTED_SESSION_IN_PROGRESS,
             UNSPECIFIED_ERROR,
         };
-        AddPlayerResponse addPlayer(const std::string& p);
+        AddPlayerResponse addPlayer(const AddPlayerDto &dto);
 
         enum class ShipPlacementResponse {
             ACCEPTED_UPDATED_SHIP_POSITIONS_WAITING_FOR_OTHER_PLAYER,
@@ -35,7 +38,7 @@ namespace Battleships {
             REJECTED_CANNOT_PLACE_SHIPS_NOW,
             UNSPECIFIED_ERROR,
         };
-        ShipPlacementResponse placeShips(unsigned int iPlayer, PlayerShipPositionsDto &dto);
+        ShipPlacementResponse placeShips(unsigned int iPlayer, const PlayerShipPositionsDto &dto);
 
         enum class GuessResponse {
             ACCEPTED_HIT,
@@ -57,9 +60,12 @@ namespace Battleships {
         };
         RestartResponse restartGame();
 
+        bool hasPlayer(const std::string &username) const;
+        int getPlayerId(const std::string &username) const;
+        unsigned int nPlayers() const;
+
     private:
 
-        unsigned int nPlayers() const;
         std::vector<PlayerData> players;
 
         enum class GameState {
