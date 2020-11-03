@@ -22,6 +22,7 @@ namespace Battleships {
 
         bool overlaps(CoordinateLine) const;
 
+        unsigned int size() const;
     private:
         bool isSorted() const;
         void sort() const;

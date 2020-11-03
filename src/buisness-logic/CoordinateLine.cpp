@@ -6,6 +6,23 @@
 #include "CoordinateLine.hpp"
 #include "buisness-logic/Orientation.hpp"
 
+namespace
+{
+    bool isSorted(Battleships::CoordinateLine l){ return std::is_sorted(l.begin(),l.end()); }
+
+    std::vector<Battleships::Coordinate> sort(Battleships::CoordinateLine l){
+
+        std::vector<Battleships::Coordinate> vec(l.size(),
+                Battleships::Coordinate(
+                        Battleships::Row::Invalid,
+                        Battleships::Column::Invalid));
+
+        std::copy(l.begin(),l.end(),vec.begin());
+        std::sort(vec.begin(),vec.end());
+        return vec;
+    }
+}
+
 Battleships::CoordinateLine::CoordinateLine(Battleships::Coordinate front, Battleships::Coordinate back)
 {
     if (!front.isValid()) return;
@@ -48,12 +65,5 @@ bool Battleships::CoordinateLine::overlaps(Battleships::CoordinateLine) const {
     return false;
 }
 
-bool Battleships::CoordinateLine::isSorted() const { return std::is_sorted(_data.begin(),_data.end()); }
-
-void Battleships::CoordinateLine::sort() const {
-    if(!this->isSorted())
-    {
-        //std::sort(_data.begin(),_data.end());
-    }
-}
+unsigned int Battleships::CoordinateLine::size() const { return _data.size(); }
 
