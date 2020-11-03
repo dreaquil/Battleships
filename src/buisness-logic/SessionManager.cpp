@@ -77,6 +77,22 @@ namespace Battleships {
 
     SessionManager::GuessResponse SessionManager::playerGuess(const PlayerGuessDto &dto) {
         const std::lock_guard<std::mutex> lock(mainMutex);
+
+
+
+
+
+        enum class GuessResponse {
+            ACCEPTED_HIT,
+            ACCEPTED_HIT_AND_SUNK,
+            ACCEPTED_HIT_AND_SUNK_WIN_CONDITION,
+            ACCEPTED_MISS,
+            REJECTED_INVALID_COORDINATE,
+            REJECTED_UNRECOGNISED_PLAYER,
+            REJECTED_USER_CANNOT_GUESS_NOW,
+        };
+        GuessResponse playerGuess(const PlayerGuessDto& dto);
+
         return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER; // todo
     }
 

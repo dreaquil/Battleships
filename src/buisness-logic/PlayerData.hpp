@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "PlayerShipStore.hpp"
+#include "Peg.hpp"
 #include "dto/PlayerShipPositionsDto.hpp"
 #include "dto/AddPlayerDto.hpp"
 
@@ -26,11 +27,13 @@ namespace Battleships {
         void positionShips(const PlayerShipPositionsDto& dto);
 
     private:
-
         unsigned int _id;
         std::string _username;
         bool isPlayerOne;
         std::unique_ptr<PlayerShipStore> shipsStore;
+
+        // IMPORTANT: correspond to pins places on opponent's board - *NOT* their own one.
+        std::vector<Peg> guessPegs;
     };
 
 }
