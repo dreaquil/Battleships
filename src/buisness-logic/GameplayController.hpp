@@ -6,8 +6,8 @@
 #define BATTLESHIPS_GAMEPLAYCONTROLLER_HPP
 
 #include "LowerBoard.hpp"
-#include "UpperBoard.hpp"
 #include "Coordinate.hpp"
+#include "Peg.hpp"
 
 /*
  * Todo:
@@ -33,15 +33,18 @@ namespace Battleships {
         GuessResponse placePin(const Coordinate& pos);
 
         bool isPlayer1Setup() const;
-        bool isPlayer2Setup() const;
         void positionPlayer1Ships(const PlayerShipPositionsDto& dto);
+        std::vector<Peg> player1UpperBoardPegs() const;
+        std::vector<Peg> player1LowerBoardPegs() const;
+
+        bool isPlayer2Setup() const;
         void positionPlayer2Ships(const PlayerShipPositionsDto& dto);
+        std::vector<Peg> player2UpperBoardPegs() const;
+        std::vector<Peg> player2LowerBoardPegs() const;
 
     private:
         LowerBoard m_p1LowerBoard;
-        UpperBoard m_p1UpperBoard;
         LowerBoard m_p2LowerBoard;
-        UpperBoard m_p2UpperBoard;
     };
 
 }

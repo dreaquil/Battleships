@@ -12,7 +12,6 @@
 #include "dto/PlayerShipPositionsDto.hpp"
 #include "LowerBoard.hpp"
 #include "dto/AddPlayerDto.hpp"
-#include "UpperBoard.hpp"
 
 namespace Battleships {
 
