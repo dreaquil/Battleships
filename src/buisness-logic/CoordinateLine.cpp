@@ -8,19 +8,28 @@
 
 namespace
 {
-    bool isSorted(Battleships::CoordinateLine l){ return std::is_sorted(l.begin(),l.end()); }
+    bool isSorted(const Battleships::CoordinateLine& l){ return std::is_sorted(l.begin(),l.end()); }
 
-    std::vector<Battleships::Coordinate> sort(Battleships::CoordinateLine l){
+    std::vector<Battleships::Coordinate> getSortCoordinates(const Battleships::CoordinateLine& l){
 
-        std::vector<Battleships::Coordinate> vec(l.size(),
-                Battleships::Coordinate(
-                        Battleships::Row::Invalid,
-                        Battleships::Column::Invalid));
-
+        using namespace Battleships;
+        std::vector<Coordinate> vec(l.size(),Coordinate(Row::Invalid,Column::Invalid));
         std::copy(l.begin(),l.end(),vec.begin());
         std::sort(vec.begin(),vec.end());
+
         return vec;
     }
+
+    bool haveMatchingCoordinates(const Battleships::CoordinateLine& a, const Battleships::CoordinateLine& b) {
+
+        using namespace Battleships;
+        std::vector<Coordinate> buffer(a.size()+b.size(),Coordinate(Row::Invalid,Column::Invalid));
+        std::vector<Coordinate>::iterator it;
+        it = std::set_union (a.begin(), a.end(), b.begin(), b.end(), buffer.begin());
+
+        return std::distance(buffer.begin(),it)>0;
+    }
+
 }
 
 Battleships::CoordinateLine::CoordinateLine(Battleships::Coordinate front, Battleships::Coordinate back)
