@@ -6,6 +6,7 @@
 #include "dto/PageDto.hpp"
 #include "dto/SessionSummaryDto.hpp"
 #include "dto/StatusDto.hpp"
+#include "dto/PlayerGuessDto.hpp"
 
 #include "oatpp/web/protocol/http/Http.hpp"
 #include "oatpp/core/macro/component.hpp"
@@ -18,6 +19,7 @@ public:
 
     oatpp::Object<AddPlayerDto> addPlayer(const oatpp::Object<AddPlayerDto>& dto);
     oatpp::Object<StatusDto> placeShips(const oatpp::Object<PlayerShipPositionsDto>& dto);
+    oatpp::Object<PlayerGuessDto> playerGuess(const oatpp::Object<PlayerGuessDto>& dto);
 
 
   oatpp::Object<GameDto> createGame(const oatpp::Object<GameDto>& dto);

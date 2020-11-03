@@ -68,6 +68,55 @@ oatpp::Object<StatusDto> GameManagementService::placeShips(const oatpp::Object<P
 }
 
 
+oatpp::Object<PlayerGuessDto> GameManagementService::playerGuess(const oatpp::Object<PlayerGuessDto> &dto) {
+
+    using InternalResponse = Battleships::SessionManager::GuessResponse;
+
+    auto ir = m_sessionManager.playerGuess(UNWRAP(dto));
+
+    auto ExternalResponse = oatpp::Object<PlayerGuessDto>::createShared();
+    ExternalResponse->id = dto->id;
+    ExternalResponse->iRow = dto->iRow;
+    ExternalResponse->iColumn = dto->iColumn;
+
+    switch (ir)
+    {
+        case InternalResponse::ACCEPTED_HIT : {
+            ExternalResponse->result = PlayerGuessResult::HIT;
+            break;
+        }
+        case InternalResponse::ACCEPTED_HIT_AND_SUNK :
+        case InternalResponse::ACCEPTED_HIT_AND_SUNK_WIN_CONDITION :{
+            ExternalResponse->result = PlayerGuessResult::HIT_AND_SUNK;
+            break;
+        }
+        case InternalResponse::ACCEPTED_MISS :{
+            ExternalResponse->result = PlayerGuessResult::MISS;
+            break;
+        }
+        case InternalResponse::REJECTED_INVALID_COORDINATE :
+        case InternalResponse::REJECTED_UNRECOGNISED_PLAYER :
+        case InternalResponse::REJECTED_USER_CANNOT_GUESS_NOW :
+        default : {
+            ExternalResponse->result = PlayerGuessResult::INVALID;
+        }
+    }
+
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::REJECTED_INVALID_COORDINATE, Status::CODE_417, "Guess is invalid");
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::REJECTED_UNRECOGNISED_PLAYER, Status::CODE_417, "Unrecognised player ID");
+    OATPP_ASSERT_HTTP(ir!=InternalResponse::REJECTED_USER_CANNOT_GUESS_NOW, Status::CODE_500, "Player not permitted to guess right now");
+
+    return ExternalResponse;
+
+}
+
+
+
+
+
+
+
+
 
 
 

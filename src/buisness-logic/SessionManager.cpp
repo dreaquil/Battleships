@@ -107,4 +107,8 @@ namespace Battleships {
         return id>=0 && id<2 && id<players.size() ? players[id].username() : std::string("<not-found>");
     }
 
+    SessionManager::GuessResponse SessionManager::playerGuess(const PlayerGuessDto &dto) {
+        return SessionManager::GuessResponse::REJECTED_UNRECOGNISED_PLAYER;
+    }
+
 }

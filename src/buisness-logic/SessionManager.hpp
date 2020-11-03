@@ -9,6 +9,7 @@
 
 #include "dto/AddPlayerDto.hpp"
 #include "dto/PlayerShipPositionsDto.hpp"
+#include "dto/PlayerGuessDto.hpp"
 
 #include "buisness-logic/PlayerData.hpp"
 #include "buisness-logic/PlayerShipStore.hpp"
@@ -44,11 +45,12 @@ namespace Battleships {
             ACCEPTED_HIT,
             ACCEPTED_HIT_AND_SUNK,
             ACCEPTED_HIT_AND_SUNK_WIN_CONDITION,
+            ACCEPTED_MISS,
             REJECTED_INVALID_COORDINATE,
             REJECTED_UNRECOGNISED_PLAYER,
             REJECTED_USER_CANNOT_GUESS_NOW,
         };
-        GuessResponse guess(unsigned int iPlayer, const std::string& username);
+        GuessResponse playerGuess(const PlayerGuessDto& dto);
 
         enum class TerminateGameResponse {
             ACCEPTED_ABORTING_GAME,

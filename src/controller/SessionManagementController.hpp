@@ -72,6 +72,21 @@ public:
         return createDtoResponse(Status::CODE_200, m_gameManagementService.placeShips(dto));
     }
 
+    ENDPOINT_INFO(player_guess) {
+        info->summary = "Guess a coordinate";
+
+        info->addConsumes<Object<PlayerGuessDto>>("application/json");
+
+        info->addResponse<Object<StatusDto>>(Status::CODE_200, "application/json");
+        info->addResponse<Object<StatusDto>>(Status::CODE_417, "application/json");
+        info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
+    }
+    ENDPOINT("POST", "player_guess", player_guess, BODY_DTO(Object<PlayerGuessDto>, dto))
+    {
+        return createDtoResponse(Status::CODE_200, m_gameManagementService.playerGuess(dto));
+    }
+
+
 
 
 
