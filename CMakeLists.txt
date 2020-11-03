@@ -30,7 +30,14 @@ add_library(battleships-lib
         src/buisness-logic/Ship.cpp
         src/buisness-logic/Ship.hpp
         src/dto/PlayerShipPositionsDto.hpp
-        src/buisness-logic/PlayerShipStore.cpp src/buisness-logic/PlayerShipStore.hpp src/buisness-logic/PlayerData.cpp src/buisness-logic/PlayerData.hpp src/buisness-logic/SessionManager.cpp src/buisness-logic/SessionManager.hpp src/dto/SessionSummaryDto.hpp)
+        src/buisness-logic/PlayerShipStore.cpp
+        src/buisness-logic/PlayerShipStore.hpp
+        src/buisness-logic/PlayerData.cpp
+        src/buisness-logic/PlayerData.hpp
+        src/buisness-logic/SessionManager.cpp
+        src/buisness-logic/SessionManager.hpp
+        src/dto/SessionSummaryDto.hpp
+        src/dto/TurnGuessDto.hpp)
 
 ## include directories
 
