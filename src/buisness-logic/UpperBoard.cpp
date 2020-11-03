@@ -4,5 +4,3 @@
 
 #include "Peg.hpp"
 #include "UpperBoard.hpp"
-
-std::vector<Battleships::Peg> Battleships::UpperBoard::pegs() const { return playerBoardForOpponent->pegs(); }

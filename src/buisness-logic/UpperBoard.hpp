@@ -16,7 +16,7 @@ namespace Battleships {
     public:
         std::vector<Peg> pegs() const;
     private:
-        const LowerBoard* playerBoardForOpponent;
+        std::vector<Peg> m_pegs;
     };
 
 }
