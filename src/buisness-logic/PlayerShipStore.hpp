@@ -16,7 +16,7 @@ namespace Battleships {
     class PlayerShipStore {
     public:
         PlayerShipStore(const PlayerShipPositionsDto& dto);
-
+        
         bool isValid() const;
     private:
         std::array<Ship,5> _ships;

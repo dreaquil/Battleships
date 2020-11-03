@@ -45,6 +45,8 @@ namespace Battleships {
         bool hasValidOrientation() const;
         bool isOverLapping(const Ship& other) const;
         bool isOccupying(Coordinate pos) const;
+        bool isSunk() const;
+        void hit();
 
     private:
 
@@ -52,7 +54,7 @@ namespace Battleships {
         Type _type;
         Orientation _orientation;
         Coordinate _topLeftCoordinate;
-        unsigned int _size;
+        unsigned int _pegsUntilSunk;
 
     };
 

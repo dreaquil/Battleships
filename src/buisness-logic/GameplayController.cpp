@@ -36,3 +36,7 @@ std::vector<Battleships::Peg> Battleships::GameplayController::player2LowerBoard
     return m_p2LowerBoard.pegs();
 }
 
+Battleships::GuessResponse Battleships::GameplayController::placePin(const Battleships::Coordinate &pos) {
+    return Battleships::GuessResponse::REJECTED_UNRECOGNISED_PLAYER;
+}
+
