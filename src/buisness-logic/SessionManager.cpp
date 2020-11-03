@@ -112,7 +112,13 @@ namespace Battleships {
     }
 
     SessionManager::RestartResponse SessionManager::restartGame(const GameRestartDto &dto) {
-        return SessionManager::RestartResponse::ACCEPTED_RESTART_SESSION; // todo
+        int id = dto.id;
+        if (id<0 || id<2 || id>=players.size()) return SessionManager::RestartResponse::REJECTED_UNRECOGNISED_PLAYER;
+
+        players.clear();
+        _state = GameState::WAITING_FOR_PLAYER;
+
+        return SessionManager::RestartResponse::ACCEPTED_RESTART_SESSION :
     }
 
 }
