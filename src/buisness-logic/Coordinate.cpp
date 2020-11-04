@@ -9,12 +9,16 @@ namespace Battleships {
     Coordinate::Coordinate(Row r, Column c) : _row(r), _column(c)
     {}
 
-    bool Coordinate::operator==(const Coordinate &other) {
+    bool Coordinate::operator==(const Coordinate &other) const {
         return
                 this->isValid() &&
                 other.isValid() &&
                 this->_row == other._row &&
                 this->_column == other._column;
+    }
+
+    bool Coordinate::operator<(const Coordinate &other) const {
+        return this->row()==other.row() ? this->column()<other.column() : this->row()<other.row();
     }
 
     Coordinate Coordinate::shiftDown(unsigned int nCol) {

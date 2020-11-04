@@ -10,6 +10,7 @@
 
 #include "PlayerShipStore.hpp"
 #include "dto/PlayerShipPositionsDto.hpp"
+#include "LowerBoard.hpp"
 #include "dto/AddPlayerDto.hpp"
 
 namespace Battleships {
@@ -22,15 +23,11 @@ namespace Battleships {
 
         int id() const;
         std::string username() const;
-        bool isSetup() const;
-        void positionShips(const PlayerShipPositionsDto& dto);
 
     private:
-
         unsigned int _id;
         std::string _username;
         bool isPlayerOne;
-        std::unique_ptr<PlayerShipStore> shipsStore;
     };
 
 }

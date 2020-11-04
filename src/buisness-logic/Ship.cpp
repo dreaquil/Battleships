@@ -2,14 +2,16 @@
 // Created by david on 01/11/2020.
 //
 
+#include <algorithm>
 #include <unordered_map>
 #include "Ship.hpp"
 #include "dto/ShipPositionDto.hpp"
+#include "CoordinateLine.hpp"
 
 namespace {
 
     using Type = Battleships::Ship::Type;
-    using Orientation = Battleships::Ship::Orientation;
+    using Orientation = Battleships::Orientation;
     using Row = Battleships::Row;
     using Column = Battleships::Column;
 
@@ -67,18 +69,20 @@ namespace Battleships
 {
 
     Ship::Ship(Ship::Type t, Coordinate topLeftCoordinate, Orientation orientation)
-    :  _type(t), _topLeftCoordinate(topLeftCoordinate), _orientation(orientation), _size(shipSizeMap.at(t))
+    : _type(t), _topLeftCoordinate(topLeftCoordinate), _orientation(orientation), _pegsUntilSunk(shipSizeMap.at(t))
     {}
 
     Ship::Ship(Type t, char topLeftRow, char topLeftColumn, char orientation) :
             _topLeftCoordinate(Coordinate(rowFrom(topLeftRow),columnFrom(topLeftColumn))),
             _orientation(orientationFrom(orientation)),
-            _type(t)
+            _type(t),
+            _pegsUntilSunk(shipSizeMap.at(t))
     {}
 
     Ship::Ship(const ShipPositionDto &dto) :
             _orientation(orientationFrom(dto.orientation)),
             _type(typeFrom(dto.type)),
+            _pegsUntilSunk(shipSizeMap.at(_type)),
             _topLeftCoordinate(
                     Coordinate(
                             rowFrom(dto.topLeftRow),
@@ -91,7 +95,7 @@ namespace Battleships
     }
 
     unsigned int Ship::size() const {
-        return _size;
+        return shipSizeMap.at(_type);
     }
 
     bool Ship::hasHorizontalOrientation() const {
@@ -103,7 +107,7 @@ namespace Battleships
     }
 
     Coordinate Ship::bottomRightCoordinate() const {
-        return hasHorizontalOrientation() ? topLeftCoordinate().shiftRight(_size) : topLeftCoordinate().shiftDown(_size);
+        return hasHorizontalOrientation() ? topLeftCoordinate().shiftRight(this->size()) : topLeftCoordinate().shiftDown(this->size());
     }
 
     bool Ship::isHangingOffEdge() const {
@@ -129,5 +133,20 @@ namespace Battleships
         _orientation == Orientation::Vertical;
     }
 
+    bool Ship::isOverLapping(const Ship& other) const {
+        CoordinateLine thisFootprint(this->topLeftCoordinate(), this->bottomRightCoordinate());
+        CoordinateLine otherFootprint(other.topLeftCoordinate(), other.bottomRightCoordinate());
+
+        if (thisFootprint.overlaps(otherFootprint)) return false;
+    }
+
+    bool Ship::isOccupying(Coordinate pos) const {
+        CoordinateLine thisFootprint(this->topLeftCoordinate(), this->bottomRightCoordinate());
+        return std::any_of(thisFootprint.begin(),thisFootprint.end(),[&pos](const Coordinate& e){ return pos==e;});
+    }
+
+    bool Ship::isSunk() const { return _pegsUntilSunk==0; }
+
+    void Ship::hit() { _pegsUntilSunk = _pegsUntilSunk -1; }
 
 }

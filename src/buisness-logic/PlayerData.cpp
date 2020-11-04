@@ -20,8 +20,4 @@ int Battleships::PlayerData::id() const { return _id; }
 
 std::string Battleships::PlayerData::username() const { return _username; }
 
-bool Battleships::PlayerData::isSetup() const { return shipsStore ? true : false; }
 
-void Battleships::PlayerData::positionShips(const PlayerShipPositionsDto &dto) {
-    shipsStore = std::make_unique<PlayerShipStore>(dto);
-}

@@ -23,14 +23,6 @@ public:
     oatpp::Object<PlayerGuessDto> playerGuess(const oatpp::Object<PlayerGuessDto>& dto);
     oatpp::Object<StatusDto> restartGame(const oatpp::Object<GameRestartDto>& dto);
 
-
-  oatpp::Object<GameDto> createGame(const oatpp::Object<GameDto>& dto);
-  oatpp::Object<GameDto> getGameById(const oatpp::Int32& id, const std::shared_ptr<oatpp::orm::Connection>& connection = nullptr);
-
-  oatpp::Object<AddPlayerDto> getPlayerById(const oatpp::Int32& id, const std::shared_ptr<oatpp::orm::Connection>& connection = nullptr);
-
-
-
 private:
     typedef oatpp::web::protocol::http::Status Status;
 private:

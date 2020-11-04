@@ -13,7 +13,8 @@ namespace Battleships {
     class Coordinate {
     public:
         Coordinate(Row r, Column c);
-        bool operator==(const Coordinate& other);
+        bool operator==(const Coordinate& other) const;
+        bool operator<(const Coordinate& other) const;
 
         Coordinate shiftDown(unsigned int nCol);
         Coordinate shiftRight(unsigned int nRow);

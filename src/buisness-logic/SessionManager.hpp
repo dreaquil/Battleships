@@ -6,7 +6,6 @@
 #define BATTLESHIPS_SESSIONMANAGER_HPP
 
 #include <memory>
-
 #include "dto/AddPlayerDto.hpp"
 #include "dto/PlayerShipPositionsDto.hpp"
 #include "dto/PlayerGuessDto.hpp"
@@ -14,6 +13,7 @@
 
 #include "buisness-logic/PlayerData.hpp"
 #include "buisness-logic/PlayerShipStore.hpp"
+#include "GameplayController.hpp"
 
 
 
@@ -62,8 +62,8 @@ namespace Battleships {
         enum class GameState : int {
             WAITING_FOR_PLAYER = 1,
             PLACING_SHIPS = 2,
-            PLAYER_1_TURN = 3,
-            PLAYER_2_TURN = 4,
+            PLAYER_1_TURN = 3, // Todo:
+            PLAYER_2_TURN = 4, //  Combine here and track turns in the game state manager
             TERMINATED = 5,
         };
         SessionManager::GameState gameState() const;
@@ -76,6 +76,7 @@ namespace Battleships {
 
 
     private:
+        GameplayController _gameplayController;
         GameState _state = GameState::WAITING_FOR_PLAYER;
         std::vector<PlayerData> players;
     };

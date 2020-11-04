@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "buisness-logic/Coordinate.hpp"
+#include "buisness-logic/Orientation.hpp"
 #include "dto/ShipPositionDto.hpp"
 
 namespace Battleships {
@@ -28,13 +29,6 @@ namespace Battleships {
             Invalid,
         };
 
-        enum class Orientation : char {
-            Horizontal = 'H',
-            Vertical = 'V',
-
-            Invalid = '-',
-        };
-
         Ship(Type t, Coordinate topLeftCoordinate, Orientation orientation);
         Ship(Type t, char topLeftRow, char topLeftColumn, char orientation);
         Ship(const ShipPositionDto& dto);
@@ -49,6 +43,10 @@ namespace Battleships {
         bool isHangingOffEdge() const;
         bool hasValidType() const;
         bool hasValidOrientation() const;
+        bool isOverLapping(const Ship& other) const;
+        bool isOccupying(Coordinate pos) const;
+        bool isSunk() const;
+        void hit();
 
     private:
 
@@ -56,7 +54,7 @@ namespace Battleships {
         Type _type;
         Orientation _orientation;
         Coordinate _topLeftCoordinate;
-        unsigned int _size;
+        unsigned int _pegsUntilSunk;
 
     };
 
