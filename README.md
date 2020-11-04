@@ -37,9 +37,17 @@ As soon as all of one player's ships have been sunk, the game ends.
 
 ## Overview
 
-Limitations:
-- **No Unit Tests/CI**
-- **No interfaces/dependency injection, gratuitous use of oatpp framework**
+### **Notes For Assessor:** 
+Still a couple of hours of work to do - that's been 4 days - it needs a little more time to complete/clean/consolidate...
+- The program requires Docker, - see instructions to run a container below...
+- ...otherwise - anyone who wants to run it might need to tweak the build scripts
+- It's a server application - I thought a CLI wouldn't be right
+- I avoided a rushed solution - the idea was to showcase maintainable extensible code albeit there's no testing
+- there's gratuitous use of a framework (no injection)
+- there's loads of enums for some reason?! I'm more used to numerical code - not sure if this is bad?
+- I've used swagger so the api is documented and can be played with on port 8000: "localhost:8000"
+- I've not tested it - I would have done a simple frontend using react but that was never gonna happen
+- ... consequently it'll be buggy as anything however, the defensive checks will turn up bugs quickly
 
 References:
 - https://www.tutorialspoint.com/http/http_methods.htm

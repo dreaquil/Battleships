@@ -137,7 +137,9 @@ namespace Battleships
         CoordinateLine thisFootprint(this->topLeftCoordinate(), this->bottomRightCoordinate());
         CoordinateLine otherFootprint(other.topLeftCoordinate(), other.bottomRightCoordinate());
 
-        if (thisFootprint.overlaps(otherFootprint)) return false;
+        if (thisFootprint.overlaps(otherFootprint)) return true;
+
+        return false;
     }
 
     bool Ship::isOccupying(Coordinate pos) const {

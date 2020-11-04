@@ -29,6 +29,8 @@ namespace
                 return SessionManager::GuessResponse::ACCEPTED_MISS;
             case GameplayController::GuessResponse::REJECTED_INVALID_COORDINATE :
                 return SessionManager::GuessResponse::REJECTED_INVALID_COORDINATE;
+            default:
+                return SessionManager::GuessResponse::UNSPECIFIED_ERROR;
         }
     }
 }
@@ -182,7 +184,6 @@ namespace Battleships {
             default :
                 return "<unknown>";
         };
-        return std::__cxx11::string();
     }
 
     bool SessionManager::hasPlayer(const std::string &username) const {

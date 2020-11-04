@@ -50,6 +50,7 @@ namespace Battleships {
             REJECTED_INVALID_COORDINATE,
             REJECTED_UNRECOGNISED_PLAYER,
             REJECTED_USER_CANNOT_GUESS_NOW,
+            UNSPECIFIED_ERROR,
         };
         GuessResponse playerGuess(const PlayerGuessDto& dto);
 
